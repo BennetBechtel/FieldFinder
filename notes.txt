@@ -1,0 +1,8 @@
+Gym Props:
+  Name
+  City
+  Zip-Code
+  Address
+  IMG
+  Features
+  Availability 
