@@ -3,6 +3,7 @@ import env from "./util/validateEnv.js";
 import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
+import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 // Connect to MongoDB Database
 mongoose.connect(env.MONGO_CONNECTION_STRING);
@@ -19,6 +20,7 @@ app.use(cors());
 app.get("/api/test", async (request, response) => {
   response.json({ message: "test ok" });
 });
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(env.PORT, () => {
