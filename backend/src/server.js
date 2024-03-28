@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+
 // Connect to MongoDB Database
 mongoose.connect(env.MONGO_CONNECTION_STRING);
 
