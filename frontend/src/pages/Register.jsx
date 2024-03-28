@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from "../api-clients.js";
+import { useAppContext } from "../contexts/AppContext.jsx";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { showToast } = useAppContext();
+
   const {
     register,
     handleSubmit,
@@ -12,10 +16,15 @@ const Register = () => {
 
   const mutation = useMutation(apiClient.register, {
     onSuccess: () => {
-      console.log("registration successful");
+      navigate("/");
+      showToast({ message: "Registrierung erfolgreich!", type: "SUCCESS" });
     },
     onError: (error) => {
-      console.log(error.message);
+      showToast(
+        error.message === "User already exists"
+          ? { message: "Benutzer existiert bereits", type: "ERROR" }
+          : { message: "Ein Fehler ist aufgetreten", type: "ERROR" }
+      );
     },
   });
 
@@ -57,16 +66,6 @@ const Register = () => {
           <input
             {...register("email", {
               required: "Gib deine Email-Adresse ein",
-              validate: (value) => {
-                const isValid = value
-                  .toLowerCase()
-                  .match(
-                    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-                  );
-                if (!isValid) {
-                  return "Ungültige Email-Adresse";
-                }
-              },
             })}
             type="email"
             placeholder="email@addresse.de"
