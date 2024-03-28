@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import * as apiClient from "../api-clients.js";
+import { useMutation, useQueryClient } from "react-query";
+import * as apiClient from "../api-client.js";
 import { useAppContext } from "../contexts/AppContext.jsx";
 
 const Register = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { showToast } = useAppContext();
 
@@ -15,9 +16,10 @@ const Register = () => {
   } = useForm();
 
   const mutation = useMutation(apiClient.register, {
-    onSuccess: () => {
-      navigate("/");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("validateToken");
       showToast({ message: "Registrierung erfolgreich!", type: "SUCCESS" });
+      navigate("/");
     },
     onError: (error) => {
       showToast(
@@ -36,7 +38,7 @@ const Register = () => {
     <div className="mt-4 grow flex items-center justify-around">
       <div className="items-center h-full mt-44">
         <h1 className="text-4xl text-center mb-4">Registrieren</h1>
-        <form className="max-w-md mx-auto" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="max-w-md mx-auto">
           <input
             {...register("firstName", {
               required: "Gib deinen Vornamen ein",

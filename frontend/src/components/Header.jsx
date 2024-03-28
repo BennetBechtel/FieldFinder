@@ -1,8 +1,11 @@
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo from "../assets/Logo.png";
+import { useAppContext } from "../contexts/AppContext";
+import LogoutButton from "./LogoutButton";
 
 const Header = () => {
+  const { isLoggedIn } = useAppContext();
+
   return (
     <header className="flex justify-between items-center bg-zinc-300 p-2 shadow-sm">
       <div className="flex items-center gap-2">
@@ -14,17 +17,28 @@ const Header = () => {
         </Link>
       </div>
 
-      <ul className="flex gap-4 text-xl font-semibold">
-        <li className="hidden md:inline hover:underline">
-          <Link to={"/"}>Home</Link>
-        </li>
-        <li className="hidden md:inline hover:underline">
-          <Link to={"/about"}>Über uns</Link>
-        </li>
-        <li>
-          <Link to={"/login"}>Anmelden</Link>
-        </li>
-      </ul>
+      <span className="flex gap-5 text-xl font-semibold">
+        {isLoggedIn ? (
+          <>
+            <Link to={"/"} className="hidden md:inline hover:underline">
+              Home
+            </Link>
+            <Link to={"/"} className="hidden md:inline hover:underline">
+              Meine Buchungen
+            </Link>
+            <LogoutButton />
+          </>
+        ) : (
+          <>
+            <Link to={"/"} className="hidden md:inline hover:underline">
+              Home
+            </Link>
+            <Link to={"/login"} className="hover:opacity-75 active:opacity-65">
+              Anmelden
+            </Link>
+          </>
+        )}
+      </span>
     </header>
   );
 };

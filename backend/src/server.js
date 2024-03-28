@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import cookieParser from "cookie-parser";
 
 // Connect to MongoDB Database
 mongoose.connect(env.MONGO_CONNECTION_STRING);
@@ -13,9 +14,15 @@ mongoose.connect(env.MONGO_CONNECTION_STRING);
 const app = express();
 
 // Middleware
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 
 // Routes
 app.get("/api/test", async (request, response) => {
