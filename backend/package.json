@@ -6,7 +6,8 @@
   "main": "./src/server.js",
   "scripts": {
     "start": "node",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "envalid": "^8.0.0",
     "express": "^4.19.1",

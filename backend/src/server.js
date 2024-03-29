@@ -8,7 +8,7 @@ import userRoutes from "./routes/users.js";
 import cookieParser from "cookie-parser";
 
 // Connect to MongoDB Database
-mongoose.connect(env.MONGO_CONNECTION_STRING);
+mongoose.connect(env.MONGO_CONNECTION_STRING)
 
 // Express App
 const app = express();
