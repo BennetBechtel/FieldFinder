@@ -5,4 +5,7 @@ export default cleanEnv(process.env, {
   PORT: port(),
   JWT_SECRET_KEY: str(),
   FRONTEND_URL: str(),
+  CLOUDINARY_CLOUD_NAME: str(),
+  CLOUDINARY_API_KEY: str(),
+  CLOUDINARY_API_SECRET: str(),
 });

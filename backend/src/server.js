@@ -5,7 +5,9 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import myGymRoutes from "./routes/my-gyms.js";
 import cookieParser from "cookie-parser";
+import { v2 as cloudinary } from "cloudinary";
 
 // Import __dirname and path
 import path from "path";
@@ -13,6 +15,13 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// Connect to Cloudinary
+cloudinary.config({
+  cloud_name: env.CLOUDINARY_CLOUD_NAME,
+  api_key: env.CLOUDINARY_API_KEY,
+  api_secret: env.CLOUDINARY_API_SECRET,
+});
 
 // Connect to MongoDB Database
 mongoose.connect(env.MONGO_CONNECTION_STRING);
@@ -36,6 +45,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/apu/my-gyms", myGymRoutes);
 
 app.listen(env.PORT, () => {
   console.log(`Server running on localhost:${env.PORT}`);
