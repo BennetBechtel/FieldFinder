@@ -5,8 +5,8 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "start": "node",
     "dev": "nodemon",
+    "start": "node ./src/server.js",
     "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon"
   },
   "keywords": [],

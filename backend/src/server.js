@@ -7,8 +7,15 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import cookieParser from "cookie-parser";
 
+// Import __dirname and path
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // Connect to MongoDB Database
-mongoose.connect(env.MONGO_CONNECTION_STRING)
+mongoose.connect(env.MONGO_CONNECTION_STRING);
 
 // Express App
 const app = express();
@@ -24,10 +31,9 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+
 // Routes
-app.get("/api/test", async (request, response) => {
-  response.json({ message: "test ok" });
-});
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
