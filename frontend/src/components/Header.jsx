@@ -23,7 +23,7 @@ const Header = () => {
             <Link to={"/"} className="hidden sm:inline hover:underline">
               Home
             </Link>
-            <Link to={"/"} className="hidden sm:inline hover:underline">
+            <Link to={"/bookings"} className="hidden sm:inline hover:underline">
               Meine Buchungen
             </Link>
             <LogoutButton />
