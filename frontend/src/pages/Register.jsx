@@ -25,7 +25,7 @@ const Register = () => {
       showToast(
         error.message === "User already exists"
           ? { message: "Benutzer existiert bereits", type: "ERROR" }
-          : { message: "Ein Fehler ist aufgetreten", type: "ERROR" }
+          : { message: "Ein Fehler ist aufgetreten", type: "ERROR" },
       );
     },
   });
@@ -35,10 +35,10 @@ const Register = () => {
   });
 
   return (
-    <div className="mt-4 grow flex items-center justify-around">
-      <div className="items-center h-full mt-44">
-        <h1 className="text-4xl text-center mb-4">Registrieren</h1>
-        <form onSubmit={onSubmit} className="max-w-md mx-auto">
+    <div className="mt-4 flex grow items-center justify-around">
+      <div className="mt-44 h-full items-center">
+        <h1 className="mb-4 text-center text-4xl">Registrieren</h1>
+        <form onSubmit={onSubmit} className="mx-auto max-w-md">
           <input
             {...register("firstName", {
               required: "Gib deinen Vornamen ein",
@@ -48,7 +48,7 @@ const Register = () => {
             className="login"
           />
           {errors.firstName && (
-            <span className="text-red-500 ml-5">
+            <span className="ml-5 text-red-500">
               {errors.firstName.message}
             </span>
           )}
@@ -62,7 +62,7 @@ const Register = () => {
             className="login"
           />
           {errors.lastName && (
-            <span className="text-red-500 ml-5">{errors.lastName.message}</span>
+            <span className="ml-5 text-red-500">{errors.lastName.message}</span>
           )}
 
           <input
@@ -74,7 +74,7 @@ const Register = () => {
             className="login"
           />
           {errors.email && (
-            <span className="text-red-500 ml-5">{errors.email.message}</span>
+            <span className="ml-5 text-red-500">{errors.email.message}</span>
           )}
 
           <input
@@ -90,12 +90,12 @@ const Register = () => {
             className="login"
           />
           {errors.password && (
-            <span className="text-red-500 ml-5">{errors.password.message}</span>
+            <span className="ml-5 text-red-500">{errors.password.message}</span>
           )}
           <button type="submit" className="login">
             Registrieren
           </button>
-          <div className="items-center text-center py-2 text-gray-500">
+          <div className="items-center py-2 text-center text-gray-500">
             Du hast bereits einen Account?
             <Link to={"/login"} className="ml-1 text-gray-700 underline">
               Anmelden

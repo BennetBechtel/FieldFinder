@@ -18,7 +18,7 @@ const Toast = ({ message, type, onClose }) => {
 
   return (
     <div className={styles}>
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <span className="text-lg font-semibold">{message}</span>
       </div>
     </div>

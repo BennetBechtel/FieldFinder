@@ -1,9 +1,11 @@
-import React from 'react'
+import ManageGymForms from "../forms/ManageGymForms/ManageGymForms";
 
 const AddGym = () => {
   return (
-    <div>AddGym</div>
-  )
-}
+    <div>
+      <ManageGymForms />
+    </div>
+  );
+};
 
-export default AddGym
+export default AddGym;
