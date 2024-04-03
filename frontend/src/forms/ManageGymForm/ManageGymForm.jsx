@@ -2,10 +2,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
 import FilterSection from "./FilterSection";
 import ImagesSection from "./ImagesSection";
+import { useEffect } from "react";
 
-const ManageGymForms = ({ onSave, isLoading }) => {
+const ManageGymForm = ({ onSave, isLoading, gym }) => {
   const formMethods = useForm();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, reset } = formMethods;
+
+  useEffect(() => {
+    reset(gym);
+  }, [gym, reset]);
 
   const onSubmit = handleSubmit((formDataJson) => {
     const formData = new FormData();
@@ -47,4 +52,4 @@ const ManageGymForms = ({ onSave, isLoading }) => {
   );
 };
 
-export default ManageGymForms;
+export default ManageGymForm;

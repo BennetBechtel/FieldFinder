@@ -82,3 +82,15 @@ export const fetchMyGyms = async () => {
 
   return response.json();
 };
+
+export const fetchMyGymById = async (gymId) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-gyms/${gymId}`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching Gym");
+  }
+
+  return response.json();
+};
