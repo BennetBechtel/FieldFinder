@@ -74,4 +74,17 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/:id", verifyToken, async (req, res) => {
+  const id = req.params.id.toString();
+  try {
+    const gym = await Gym.find({
+      _id: id,
+      userId: req.userId,
+    });
+    res.json(gym);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching gym" });
+  }
+});
+
 export default router;
