@@ -70,3 +70,15 @@ export const addMyGym = async (gymFormData) => {
 
   return response.json();
 };
+
+export const fetchMyGyms = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/my-gyms`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching gyms");
+  }
+
+  return response.json();
+};

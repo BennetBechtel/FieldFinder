@@ -23,7 +23,7 @@ const Header = () => {
             <Link to={"/bookings"} className="hidden hover:underline sm:inline">
               Meine Buchungen
             </Link>
-            <Link to={"#"} className="hidden hover:underline sm:inline">
+            <Link to={"/my-gyms"} className="hidden hover:underline sm:inline">
               Meine Hallen
             </Link>
             <LogoutButton />

@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyBookings from "./pages/MyBookings";
 import AddGym from "./pages/AddGym";
+import MyGyms from "./pages/MyGyms";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -22,6 +23,7 @@ const App = () => {
 
           {isLoggedIn && (
             <>
+              <Route path="/my-gyms" element={<MyGyms />} />
               <Route path="/add-gym" element={<AddGym />} />
               <Route path="/bookings" element={<MyBookings />} />
             </>

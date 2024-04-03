@@ -65,4 +65,13 @@ router.post(
   }
 );
 
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const gyms = await Gym.find({ userId: req.userId });
+    res.status(200).json(gyms);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching gyms" });
+  }
+});
+
 export default router;

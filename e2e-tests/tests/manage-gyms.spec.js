@@ -41,3 +41,21 @@ test("should allow user to add gym", async ({ page }) => {
 
   await expect(page.getByText("Sporthalle gespeichert!")).toBeVisible();
 });
+
+test("should display gyms", async ({ page }) => {
+  await page.goto(`${UI_URL}/my-gyms`);
+
+  await expect(page.getByText("Meine Sporthallen")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Sporthalle Hinzufügen" })
+  ).toBeVisible();
+
+  await expect(page.getByText("Test Gym").first()).toBeVisible();
+  await expect(page.getByText("Test Address").first()).toBeVisible();
+  await expect(page.getByText("Test Zip-Code").first()).toBeVisible();
+  await expect(page.getByText("Test City").first()).toBeVisible();
+  await expect(page.getByText("€11 pro Stunde").first()).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Bearbeiten" }).first()
+  ).toBeVisible();
+});
