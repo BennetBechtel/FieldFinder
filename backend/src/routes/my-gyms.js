@@ -19,14 +19,17 @@ router.post(
   "/",
   verifyToken,
   [
-    body("name").notEmpty().withMessage("Gib einen Namen ein"),
-    body("city").notEmpty().withMessage("Gib eine Stadt"),
-    body("address").notEmpty().withMessage("Gib eine Adresse ein"),
+    body("name").notEmpty().withMessage("Name is required"),
+    body("city").notEmpty().withMessage("City is required"),
+    body("address").notEmpty().withMessage("Address is required"),
     body("pricePerHour")
       .notEmpty()
       .isNumeric()
-      .withMessage("Gib einen Preis in Form einer Zahl ein"),
-    body("features").notEmpty().isArray().withMessage("Gib Features an"),
+      .withMessage("Price Per Hour is required and must be an number"),
+    body("filters")
+      .notEmpty()
+      .isArray()
+      .withMessage("Select at least one filter"),
   ],
   upload.array("imageFiles", 6),
   async (req, res) => {
@@ -54,7 +57,7 @@ router.post(
       await gym.save();
 
       // Return 201 status
-      res.status(201).send(hotel);
+      res.status(201).send(gym);
     } catch (error) {
       console.log("Error creating Gym: ", error);
       res.status(500).json({ message: "Something went wrong" });

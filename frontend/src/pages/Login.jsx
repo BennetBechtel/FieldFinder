@@ -41,19 +41,19 @@ const Login = () => {
         <form onSubmit={onSubmit} className="mx-auto max-w-md">
           <input
             {...register("email", {
-              required: "Gib deine Email-Adresse ein",
+              required: "Geben Sie Ihre Email-Adresse ein",
             })}
             type="email"
             placeholder="email@addresse.de"
             className="login"
           />
           {errors.email && (
-            <span className="ml-5 text-red-500">{errors.email.message}</span>
+            <span className="input-error-message">{errors.email.message}</span>
           )}
 
           <input
             {...register("password", {
-              required: "Gib ein Passwort ein",
+              required: "Geben Sie Ihr Passwort ein",
               minLength: {
                 value: 6,
                 message: "Mindestens 6 Zeichen erforderlich",
@@ -64,7 +64,9 @@ const Login = () => {
             className="login"
           />
           {errors.password && (
-            <span className="ml-5 text-red-500">{errors.password.message}</span>
+            <span className="input-error-message">
+              {errors.password.message}
+            </span>
           )}
 
           <button type="submit" className="login">

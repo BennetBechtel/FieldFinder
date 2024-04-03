@@ -7,5 +7,21 @@ input.login {
 }
 
 button.login {
-  @apply w-full rounded-2xl bg-primary p-2;
+  @apply w-full rounded-2xl bg-primary p-2 duration-75 hover:opacity-85;
+}
+
+label.gym-form {
+  @apply mt-3 flex grow flex-col text-base font-bold text-gray-700;
+}
+
+input.gym-form {
+  @apply mt-2 w-full rounded-2xl border px-3 py-2 font-normal text-black;
+}
+
+button.gym-form {
+  @apply mb-5 rounded-2xl bg-primary px-4 py-3  text-xl font-bold duration-75 hover:opacity-85 disabled:bg-gray-400;
+}
+
+.input-error-message {
+  @apply ml-2 font-semibold text-red-500;
 }

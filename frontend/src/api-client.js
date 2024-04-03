@@ -56,3 +56,17 @@ export const logout = async () => {
     throw new Error("Error during logout");
   }
 };
+
+export const addMyGym = async (gymFormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-gyms`, {
+    method: "POST",
+    credentials: "include",
+    body: gymFormData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add Gym");
+  }
+
+  return response.json();
+};

@@ -41,45 +41,47 @@ const Register = () => {
         <form onSubmit={onSubmit} className="mx-auto max-w-md">
           <input
             {...register("firstName", {
-              required: "Gib deinen Vornamen ein",
+              required: "Geben Sie Ihren Vornamen an",
             })}
             type="text"
             placeholder="Vorname"
             className="login"
           />
           {errors.firstName && (
-            <span className="ml-5 text-red-500">
+            <span className="input-error-message">
               {errors.firstName.message}
             </span>
           )}
 
           <input
             {...register("lastName", {
-              required: "Gib deinen Nachnamen ein",
+              required: "Geben Sie Ihren Nachnamen an",
             })}
             type="text"
             placeholder="Nachname"
             className="login"
           />
           {errors.lastName && (
-            <span className="ml-5 text-red-500">{errors.lastName.message}</span>
+            <span className="input-error-message">
+              {errors.lastName.message}
+            </span>
           )}
 
           <input
             {...register("email", {
-              required: "Gib deine Email-Adresse ein",
+              required: "Geben Sie Ihre Email-Adresse an",
             })}
             type="email"
             placeholder="email@addresse.de"
             className="login"
           />
           {errors.email && (
-            <span className="ml-5 text-red-500">{errors.email.message}</span>
+            <span className="input-error-message">{errors.email.message}</span>
           )}
 
           <input
             {...register("password", {
-              required: "Gib ein Passwort ein",
+              required: "Geben Sie ein Passwort an",
               minLength: {
                 value: 6,
                 message: "Mindestens 6 Zeichen erforderlich",
@@ -90,7 +92,9 @@ const Register = () => {
             className="login"
           />
           {errors.password && (
-            <span className="ml-5 text-red-500">{errors.password.message}</span>
+            <span className="input-error-message">
+              {errors.password.message}
+            </span>
           )}
           <button type="submit" className="login">
             Registrieren

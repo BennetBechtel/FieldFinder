@@ -18,6 +18,7 @@ test("should allow the user to sign in", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "Meine Buchungen" })
   ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Meine Hallen" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Abmelden" })).toBeVisible();
 });
 
@@ -43,5 +44,6 @@ test("should allow the user to register", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "Meine Buchungen" })
   ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Meine Hallen" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Abmelden" })).toBeVisible();
 });

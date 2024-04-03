@@ -21,7 +21,7 @@ const gymSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  features: [
+  filters: [
     {
       type: String,
       required: true,
@@ -30,12 +30,6 @@ const gymSchema = new mongoose.Schema({
   pricePerHour: {
     type: Number,
     required: true,
-  },
-  starRating: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 5,
   },
   imageUrls: [
     {
