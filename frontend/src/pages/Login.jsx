@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="mt-4 flex grow items-center justify-around">
-      <div className="mt-44 h-full items-center">
+      <div className="mt-44 h-full items-center px-3">
         <h1 className="mb-4 text-center text-4xl">Anmelden</h1>
         <form onSubmit={onSubmit} className="mx-auto max-w-md">
           <input
