@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { useState } from "react";
 
 const NavElements = ({ isLoggedIn, closeNavbar }) => {
   return (
     <>
+      <Link to={"/"} onClick={closeNavbar} className="hover:underline">
+        Home
+      </Link>
       {isLoggedIn ? (
         <>
           <Link
@@ -42,17 +44,7 @@ const NavElements = ({ isLoggedIn, closeNavbar }) => {
   );
 };
 
-const Nav = ({ isLoggedIn }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeNavbar = () => {
-    setIsOpen(false);
-  };
-
+const Nav = ({ isLoggedIn, isOpen, setIsOpen, toggleNavbar, closeNavbar }) => {
   return (
     <>
       <nav>
