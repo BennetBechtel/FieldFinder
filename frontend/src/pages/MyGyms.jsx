@@ -27,7 +27,7 @@ const MyGyms = () => {
             Sporthalle Hinzufügen
           </Link>
         </section>
-        <div className="mx-auto mt-10 flex w-full max-w-5xl flex-col items-center gap-8 sm:items-start">
+        <div className="mx-auto mt-5 flex w-full max-w-5xl flex-col items-center gap-8 sm:items-start">
           {gymData.map((gym, index) => (
             <div
               key={index}
