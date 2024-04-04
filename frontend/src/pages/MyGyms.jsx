@@ -27,8 +27,11 @@ const MyGyms = () => {
         </Link>
       </span>
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        {gymData.map((gym) => (
-          <div className="flex flex-row gap-5 rounded-2xl border bg-gray-200">
+        {gymData.map((gym, index) => (
+          <div
+            key={index}
+            className="flex flex-row gap-5 rounded-2xl border bg-gray-200"
+          >
             <section className="w-44 overflow-hidden rounded-2xl">
               <img
                 src={gym.imageUrls[0]}

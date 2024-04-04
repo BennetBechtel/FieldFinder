@@ -94,3 +94,20 @@ export const fetchMyGymById = async (gymId) => {
 
   return response.json();
 };
+
+export const updateMyGymById = async (gymFormData) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-gyms/${gymFormData.get("gymId")}`,
+    {
+      method: "PUT",
+      body: gymFormData,
+      credentials: "include",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update Gym");
+  }
+
+  return response.json();
+};

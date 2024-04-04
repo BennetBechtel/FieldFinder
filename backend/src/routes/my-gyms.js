@@ -38,14 +38,7 @@ router.post(
       const newGym = req.body;
 
       // Upload Images to Cloudinary
-      const uploadPromises = imageFiles.map(async (image) => {
-        const b64 = Buffer.from(image.buffer).toString("base64");
-        let dataURI = "data:" + image.mimetype + ";base64," + b64;
-        const res = await cloudinary.v2.uploader.upload(dataURI);
-        return res.url;
-      });
-
-      const imageUrls = await Promise.all(uploadPromises);
+      const imageUrls = await uploadImages(imageFiles);
 
       // Add urls and missing information to the newGym
       newGym.imageUrls = imageUrls;
@@ -77,7 +70,7 @@ router.get("/", verifyToken, async (req, res) => {
 router.get("/:id", verifyToken, async (req, res) => {
   const id = req.params.id.toString();
   try {
-    const gym = await Gym.find({
+    const gym = await Gym.findOne({
       _id: id,
       userId: req.userId,
     });
@@ -86,5 +79,53 @@ router.get("/:id", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Error fetching gym" });
   }
 });
+
+router.put(
+  "/:id",
+  verifyToken,
+  upload.array("imageFiles"),
+  async (req, res) => {
+    const id = req.params.id.toString();
+    try {
+      const updatedGym = req.body;
+      updatedGym.lastUpdated = new Date();
+
+      const gym = await Gym.findOneAndUpdate(
+        {
+          _id: id,
+          userId: req.userId,
+        },
+        updatedGym,
+        { new: true }
+      );
+
+      if (!gym) {
+        return res.status(404).json({ message: "Gym not found" });
+      }
+
+      const imageFiles = req.files;
+      const updatedImageUrls = await uploadImages(imageFiles);
+
+      gym.imageUrls = [...updatedImageUrls, ...(updatedGym.imageUrls || [])];
+
+      await gym.save();
+      res.status(201).json(gym);
+    } catch (error) {
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  }
+);
+
+async function uploadImages(imageFiles) {
+  const uploadPromises = imageFiles.map(async (image) => {
+    const b64 = Buffer.from(image.buffer).toString("base64");
+    let dataURI = "data:" + image.mimetype + ";base64," + b64;
+    const res = await cloudinary.v2.uploader.upload(dataURI);
+    return res.url;
+  });
+
+  const imageUrls = await Promise.all(uploadPromises);
+  return imageUrls;
+}
 
 export default router;

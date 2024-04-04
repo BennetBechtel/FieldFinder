@@ -50,12 +50,25 @@ test("should display gyms", async ({ page }) => {
     page.getByRole("link", { name: "Sporthalle Hinzufügen" })
   ).toBeVisible();
 
-  await expect(page.getByText("Test Gym").first()).toBeVisible();
-  await expect(page.getByText("Test Address").first()).toBeVisible();
-  await expect(page.getByText("Test Zip-Code").first()).toBeVisible();
-  await expect(page.getByText("Test City").first()).toBeVisible();
-  await expect(page.getByText("€11 pro Stunde").first()).toBeVisible();
+  await expect(page.getByText("Test Gym").last()).toBeVisible();
+  await expect(page.getByText("Test Address").last()).toBeVisible();
+  await expect(page.getByText("Test Zip-Code").last()).toBeVisible();
+  await expect(page.getByText("Test City").last()).toBeVisible();
+  await expect(page.getByText("€11 pro Stunde").last()).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Bearbeiten" }).first()
+    page.getByRole("link", { name: "Bearbeiten" }).last()
   ).toBeVisible();
+});
+
+test("should edit gym", async ({ page }) => {
+  await page.goto(`${UI_URL}/my-gyms`);
+
+  await page.getByRole("link", { name: "Bearbeiten" }).last().click();
+
+  await page.waitForSelector('[name="name"]', { state: "attached" });
+  await expect(page.locator('[name="name"]')).toHaveValue("Test Gym");
+  await page.locator('[name="name"]').fill("Test Gym - Updated");
+  await page.getByRole("button", { name: "Speichern" }).click();
+
+  await expect(page.getByText("Sporthalle gespeichert!")).toBeVisible();
 });

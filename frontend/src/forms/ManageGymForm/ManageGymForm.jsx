@@ -14,6 +14,9 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
 
   const onSubmit = handleSubmit((formDataJson) => {
     const formData = new FormData();
+    if (gym) {
+      formData.append("gymId", gym._id);
+    }
     formData.append("name", formDataJson.name);
     formData.append("zipCode", formDataJson.zipCode);
     formData.append("city", formDataJson.city);
@@ -23,6 +26,12 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
     formDataJson.filters.forEach((filter, index) => {
       formData.append(`filters[${index}]`, filter);
     });
+
+    if (formDataJson.imageUrls) {
+      formDataJson.imageUrls.forEach((url, index) => {
+        formData.append(`imageUrls[${index}]`, url);
+      });
+    }
 
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append("imageFiles", imageFile);
@@ -35,7 +44,7 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
     <FormProvider {...formMethods}>
       <form
         onSubmit={onSubmit}
-        className="mx-auto mt-3 flex max-w-2xl grow flex-col gap-5 p-3"
+        className="mx-auto mt-3 flex w-full max-w-3xl grow flex-col gap-5 p-3"
       >
         <span className="flex flex-col gap-10">
           <DetailsSection />
