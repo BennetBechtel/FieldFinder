@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex flex-wrap items-center justify-between bg-zinc-300 p-2 shadow-sm">
+    <header className="sticky top-0 flex flex-wrap items-center justify-between bg-zinc-300 p-2 shadow-sm">
       <Logo closeNavbar={closeNavbar} />
       <Nav
         isLoggedIn={isLoggedIn}
