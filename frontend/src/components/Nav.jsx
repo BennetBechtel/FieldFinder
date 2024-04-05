@@ -48,11 +48,11 @@ const Nav = ({ isLoggedIn, isOpen, setIsOpen, toggleNavbar, closeNavbar }) => {
   return (
     <>
       <nav>
-        <div className="hidden items-center gap-5 text-xl font-semibold sm:flex">
+        <div className="hidden items-center gap-5 text-xl font-semibold md:flex">
           <NavElements isLoggedIn={isLoggedIn} closeNavbar={closeNavbar} />
         </div>
 
-        <div className="inline sm:hidden">
+        <div className="inline md:hidden">
           <button
             onClick={toggleNavbar}
             className="flex items-center justify-center"

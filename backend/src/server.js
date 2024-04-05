@@ -13,6 +13,7 @@ import { v2 as cloudinary } from "cloudinary";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { error } from "console";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -24,7 +25,10 @@ cloudinary.config({
 });
 
 // Connect to MongoDB Database
-mongoose.connect(env.MONGO_CONNECTION_STRING);
+mongoose
+  .connect(env.MONGO_CONNECTION_STRING)
+  .then(console.log("Connected to MongoDB"))
+  .catch((error) => console.error(error));
 
 // Express App
 const app = express();
