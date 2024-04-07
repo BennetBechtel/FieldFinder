@@ -11,11 +11,7 @@ const NavElements = ({ isLoggedIn, closeNavbar }) => {
       </Link>
       {isLoggedIn ? (
         <>
-          <Link
-            to={"/bookings"}
-            onClick={closeNavbar}
-            className="hover:underline"
-          >
+          <Link to={"#"} onClick={closeNavbar} className="hover:underline">
             Meine Buchungen
           </Link>
           <Link

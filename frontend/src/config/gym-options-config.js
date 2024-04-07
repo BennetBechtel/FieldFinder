@@ -1,7 +1,7 @@
 export const gymFilters = [
   {
-    title: "Spielfeldlinien",
-    filters: ["Fußball", "Basketball", "Volleyball"],
+    title: "Sportarten",
+    filters: ["Fußball", "Basketball", "Volleyball", "Fechten", "Turnen"],
   },
   {
     title: "Geräte",

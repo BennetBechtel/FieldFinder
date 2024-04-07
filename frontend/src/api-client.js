@@ -111,3 +111,19 @@ export const updateMyGymById = async (gymFormData) => {
 
   return response.json();
 };
+
+export const searchGyms = async (searchParams) => {
+  const queryParams = new URLSearchParams();
+  queryParams.append("searchTerm", searchParams.searchTerm || "");
+  queryParams.append("page", searchParams.page || "");
+
+  const response = await fetch(
+    `${API_BASE_URL}/api/gyms/search/?${queryParams}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Error fetching gyms");
+  }
+
+  return response.json();
+};
