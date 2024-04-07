@@ -26,6 +26,10 @@ router.post(
       .notEmpty()
       .isNumeric()
       .withMessage("Price Per Hour is required and must be an number"),
+    body("sports")
+      .notEmpty()
+      .isArray()
+      .withMessage("Select at least one filter"),
     body("filters")
       .notEmpty()
       .isArray()

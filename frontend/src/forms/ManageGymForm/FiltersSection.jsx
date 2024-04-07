@@ -1,7 +1,7 @@
 import { gymFilters } from "../../config/gym-options-config.js";
 import { useFormContext } from "react-hook-form";
 
-const FilterSection = () => {
+const FiltersSection = () => {
   const {
     register,
     formState: { errors },
@@ -10,7 +10,6 @@ const FilterSection = () => {
   return (
     <div className="flex flex-col">
       <h2 className="text-2xl font-bold">Filter</h2>
-
       <div>
         {gymFilters.map((item, index) => (
           <div key={index} className="ml-2">
@@ -48,4 +47,4 @@ const FilterSection = () => {
   );
 };
 
-export default FilterSection;
+export default FiltersSection;

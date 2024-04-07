@@ -1,8 +1,15 @@
-export const gymFilters = [
+export const gymSports = [
   {
-    title: "Sportarten",
-    filters: ["Fußball", "Basketball", "Volleyball", "Fechten", "Turnen"],
+    title: "Ballsportarten",
+    sports: ["Fußball", "Basketball", "Volleyball"],
   },
+  {
+    title: "Weitere",
+    sports: ["Fechten", "Turnen", "Yoga"],
+  },
+];
+
+export const gymFilters = [
   {
     title: "Geräte",
     filters: ["Weichbodenmatte", "Barren", "Sprungbrett"],
