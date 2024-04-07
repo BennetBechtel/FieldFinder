@@ -1,7 +1,7 @@
 export const gymSports = [
   {
     title: "Ballsportarten",
-    sports: ["Fußball", "Basketball", "Volleyball"],
+    sports: ["Fußball", "Basketball", "Volleyball", "Handball"],
   },
   {
     title: "Weitere",
@@ -16,6 +16,6 @@ export const gymFilters = [
   },
   {
     title: "Extras",
-    filters: ["Spiegel", "Turnboden", "Trennwände"],
+    filters: ["Spiegel", "Turnboden", "Trennwände", "Tribüne"],
   },
 ];
