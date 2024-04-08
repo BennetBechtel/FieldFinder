@@ -20,8 +20,11 @@ const SearchResultCard = ({ gym }) => {
 
           <div className="mb-8 mt-3 flex-row items-center gap-1">
             <span className="flex gap-1">
-              {gym.sports.slice(0, 3).map((sport) => (
-                <span className="text-md rounded-xl border bg-neutral-300 px-2 py-1 font-medium">
+              {gym.sports.slice(0, 3).map((sport, index) => (
+                <span
+                  key={index}
+                  className="text-md rounded-xl border bg-neutral-300 px-2 py-1 font-medium"
+                >
                   {sport}
                 </span>
               ))}

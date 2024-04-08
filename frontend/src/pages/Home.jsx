@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <div className="flex grow flex-col items-center gap-5 px-5 lg:px-2">
-      <span className="mt-5 flex w-1/2 justify-center">
+      <span className="mt-5 w-full max-w-lg">
         <SearchBar />
       </span>
 
