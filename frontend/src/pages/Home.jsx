@@ -25,7 +25,7 @@ const Home = () => {
         <SearchBar />
       </span>
 
-      <div className="grid h-full w-full max-w-[1900px] grid-cols-1 gap-5 lg:grid-cols-[300px_1fr]">
+      <div className="grid max-w-[1900px] grid-cols-1 gap-5 lg:grid-cols-[300px_1fr]">
         <section className="top-10 h-fit rounded-lg border border-slate-300 p-5 lg:sticky">
           <div className="space-y-5">
             <h3 className="border-b border-slate-300 pb-5 text-lg font-semibold">

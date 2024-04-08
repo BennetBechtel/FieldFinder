@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/search", async (req, res) => {
   try {
-    const pageSize = 20;
+    const pageSize = 16;
     const pageNumber = parseInt(
       req.query.page ? req.query.page.toString() : "1"
     );
