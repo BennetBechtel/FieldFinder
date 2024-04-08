@@ -17,7 +17,7 @@ const MyGyms = () => {
 
   return (
     <>
-      <div className="mx-10 mb-5 mt-5 flex grow flex-col">
+      <div className="mx-10 mt-5 flex grow flex-col">
         <section className="mb-5 flex flex-col items-center text-center sm:flex-row sm:justify-between">
           <h1 className="text-3xl font-bold">Meine Sporthallen</h1>
           <Link
@@ -42,11 +42,13 @@ const MyGyms = () => {
               </section>
               <section className="flex grow flex-col items-center sm:items-start sm:py-5">
                 <h2 className="text-2xl font-semibold">{gym.name}</h2>
-                <p className="text-lg">{gym.address}</p>
-                <p className="text-base">
+                <h3 className="mt-2 text-lg font-medium">{gym.address}</h3>
+                <h4 className="-mt-1">
                   {gym.zipCode}, {gym.city}
+                </h4>
+                <p className="mt-3 font-medium sm:mt-5">
+                  €{gym.pricePerHour} pro Stunde
                 </p>
-                <p className="mt-3 sm:mt-5">€{gym.pricePerHour} pro Stunde</p>
               </section>
               <section className="m-2 flex flex-col justify-end">
                 <Link

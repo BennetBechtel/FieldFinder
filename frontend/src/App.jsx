@@ -7,6 +7,7 @@ import AddGym from "./pages/AddGym";
 import MyGyms from "./pages/MyGyms";
 import EditGym from "./pages/EditGym";
 import Home from "./pages/Home";
+import ViewGym from "./pages/ViewGym";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/details/:id" element={<ViewGym />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
