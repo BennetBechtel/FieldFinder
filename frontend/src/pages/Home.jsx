@@ -87,7 +87,7 @@ const Home = () => {
               </>
             ) : (
               <>
-                <span className="flex justify-between text-center">
+                <span className="flex flex-col justify-between gap-2 text-center lg:flex-row">
                   <span className="flex flex-row gap-1 text-xl font-bold">
                     <p>{gymData?.pagination.total}</p>
                     {gymData?.pagination.total > 1 ? (
