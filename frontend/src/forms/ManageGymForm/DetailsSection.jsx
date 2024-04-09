@@ -74,6 +74,7 @@ const DetailsSection = () => {
         <input
           type="number"
           min={1}
+          max={999}
           className="gym-form max-w-[50%]"
           {...register("pricePerHour", {
             required: "Geben Sie dein Preis (Zahl) an",

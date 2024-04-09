@@ -117,6 +117,16 @@ export const searchGyms = async (searchParams) => {
   queryParams.append("searchTerm", searchParams.searchTerm || "");
   queryParams.append("page", searchParams.page || "");
 
+  queryParams.append("maxPrice", searchParams.maxPrice || "");
+  queryParams.append("sortOption", searchParams.sortOption || "");
+
+  searchParams.sports?.forEach((sport) => {
+    queryParams.append("sports", sport);
+  });
+  searchParams.filters?.forEach((filter) => {
+    queryParams.append("filters", filter);
+  });
+
   const response = await fetch(
     `${API_BASE_URL}/api/gyms/search/?${queryParams}`,
   );
