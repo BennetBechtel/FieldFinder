@@ -137,3 +137,13 @@ export const searchGyms = async (searchParams) => {
 
   return response.json();
 };
+
+export const fetchGymById = async (gymId) => {
+  const response = await fetch(`${API_BASE_URL}/api/gyms/${gymId}`, {});
+
+  if (!response.ok) {
+    throw new Error("Error fetching Gym");
+  }
+
+  return response.json();
+};

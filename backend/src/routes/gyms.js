@@ -1,4 +1,5 @@
 import express from "express";
+import { param, validationResult } from "express-validator";
 import Gym from "../models/gym.js";
 
 const router = express.Router();
@@ -50,6 +51,26 @@ router.get("/search", async (req, res) => {
     res.status(500).json("Something went wrong");
   }
 });
+
+router.get(
+  "/:id",
+  [param("id").notEmpty().withMessage("Gym ID is required")],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const id = req.params.id.toString();
+
+    try {
+      const gym = await Gym.findById(id);
+      res.json(gym);
+    } catch (error) {
+      res.status(400).json({ message: "Error fetching gym" });
+    }
+  }
+);
 
 const constructSearchQuery = (queryParams) => {
   let constructedQuery = {};

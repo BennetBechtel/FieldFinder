@@ -5,9 +5,8 @@ import { useState } from "react";
 import SearchResultCard from "../components/SearchResultCard.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 import Pagination from "../components/Pagination.jsx";
-import SportsFilter from "../components/SportsFilter.jsx";
-import FiltersFilter from "../components/FiltersFilter.jsx";
-import PriceFilter from "../components/PriceFilter.jsx";
+import { TbFilterSearch } from "react-icons/tb";
+import HomeFilters from "../components/HomeFilters.jsx";
 
 const Home = () => {
   const search = useSearchContext();
@@ -16,6 +15,11 @@ const Home = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState();
   const [sortOption, setSortOption] = useState("");
+
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const toggleFilters = () => {
+    setIsFiltersOpen(!isFiltersOpen);
+  };
 
   const searchParams = {
     searchTerm: search.searchTerm,
@@ -52,30 +56,31 @@ const Home = () => {
 
   return (
     <div className="flex grow flex-col items-center gap-5 px-5 lg:px-2">
-      <span className="mt-5 w-full max-w-lg">
-        <SearchBar />
+      <span className="mt-5 flex w-full max-w-lg flex-row items-center gap-3">
+        <span className="grow">
+          <SearchBar />
+        </span>
+
+        <span
+          onClick={() => {
+            toggleFilters();
+          }}
+          className="flex size-11 flex-row items-center justify-center rounded-full bg-zinc-300 p-[10px] lg:hidden"
+        >
+          <TbFilterSearch className="size-10" />
+        </span>
       </span>
 
       <div className="grid h-full w-full max-w-[1900px] grid-cols-1 gap-5 lg:grid-cols-[300px_1fr]">
-        <section className="top-16 h-fit rounded-lg border border-slate-300 p-5 lg:sticky">
-          <div className="space-y-5">
-            <h3 className="border-b border-slate-300 pb-5 text-lg font-semibold">
-              Filter nach:
-            </h3>
-            <SportsFilter
-              selectedSports={selectedSports}
-              onChange={handleSportsChange}
-            />
-            <FiltersFilter
-              selectedFilters={selectedFilters}
-              onChange={handleFiltersChange}
-            />
-            <PriceFilter
-              selectedPrice={selectedPrice}
-              onChange={(value) => setSelectedPrice(value)}
-            />
-          </div>
-        </section>
+        <HomeFilters
+          isFiltersOpen={isFiltersOpen}
+          selectedSports={selectedSports}
+          handleSportsChange={handleSportsChange}
+          selectedFilters={selectedFilters}
+          handleFiltersChange={handleFiltersChange}
+          selectedPrice={selectedPrice}
+          setSelectedPrice={setSelectedPrice}
+        />
 
         <section className="flex flex-col gap-5">
           <div>
