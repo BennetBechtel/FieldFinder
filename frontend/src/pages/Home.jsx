@@ -99,11 +99,9 @@ const Home = () => {
                   <select
                     value={sortOption}
                     onChange={(event) => setSortOption(event.target.value)}
-                    className="rounded-md border p-2"
+                    className="cursor-pointer rounded-md border p-2"
                   >
                     <option value="">Sortiere nach</option>
-                    <option value="A-Z">A-Z</option>
-                    <option value="Z-A">Z-A</option>
                     <option value="pricePerHourAsc">Preis aufsteigend</option>
                     <option value="pricePerHourDesc">Preis absteigend</option>
                   </select>
