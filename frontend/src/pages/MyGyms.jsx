@@ -17,7 +17,7 @@ const MyGyms = () => {
 
   return (
     <>
-      <div className="mx-10 mt-5 flex grow flex-col">
+      <div className="mt-5 flex grow flex-col px-3 lg:px-10">
         <section className="mb-5 flex flex-col items-center text-center sm:flex-row sm:justify-between">
           <h1 className="text-3xl font-bold">Meine Sporthallen</h1>
           <Link
@@ -31,13 +31,13 @@ const MyGyms = () => {
           {gymData.map((gym, index) => (
             <div
               key={index}
-              className="flex w-full max-w-[400px] flex-col gap-5 rounded-2xl border bg-gray-200 sm:max-w-none sm:flex-row"
+              className="relative flex w-full max-w-[400px] flex-col gap-5 rounded-2xl border bg-gray-200 sm:max-w-none sm:flex-row"
             >
               <section className="w-full overflow-hidden rounded-2xl sm:w-44">
                 <img
                   src={gym.imageUrls[0]}
                   alt={gym.name}
-                  className="object-cover object-center sm:h-44"
+                  className="object-cover object-center sm:h-44 sm:w-44"
                 />
               </section>
               <section className="flex grow flex-col items-center sm:items-start sm:py-5">
@@ -50,7 +50,7 @@ const MyGyms = () => {
                   €{gym.pricePerHour} pro Stunde
                 </p>
               </section>
-              <section className="m-2 flex flex-col justify-end">
+              <section className="relative bottom-0 right-0 m-2 flex flex-col justify-end sm:absolute">
                 <Link
                   to={`/edit-gym/${gym._id}`}
                   className="flex justify-center rounded-xl border bg-primary px-3 py-2 font-semibold duration-75 hover:opacity-85"

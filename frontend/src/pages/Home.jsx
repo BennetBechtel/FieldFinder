@@ -55,7 +55,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex grow flex-col items-center gap-5 px-5 lg:px-2">
+    <div className="flex grow flex-col items-center gap-5 px-3">
       <span className="mt-5 flex w-full max-w-lg flex-row items-center gap-3">
         <span className="grow">
           <SearchBar />
@@ -71,7 +71,7 @@ const Home = () => {
         </span>
       </span>
 
-      <div className="grid h-full w-full max-w-[1900px] grid-cols-1 gap-5 lg:grid-cols-[300px_1fr]">
+      <div className="grid h-full w-full grid-cols-1 gap-5 lg:grid-cols-[300px_1fr]">
         <HomeFilters
           isFiltersOpen={isFiltersOpen}
           selectedSports={selectedSports}
