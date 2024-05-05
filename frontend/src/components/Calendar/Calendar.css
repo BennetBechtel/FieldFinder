@@ -5,3 +5,7 @@
 .rbc-label rbc-time-header-gutter {
   width: auto;
 }
+
+.rbc-calendar {
+  overflow: hidden;
+}

@@ -67,7 +67,7 @@ const Detail = () => {
         </section>
       </div>
 
-      <section className="mt-10 inline min-h-[700px]">
+      <section className="mt-10 hidden h-[80vh] lg:inline">
         <Calendar events={gym?.bookings} />
       </section>
     </div>
