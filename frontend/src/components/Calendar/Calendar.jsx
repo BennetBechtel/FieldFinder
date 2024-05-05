@@ -32,7 +32,7 @@ const messages = {
 const formats = {
   // Header Date Formats
   dayHeaderFormat: (date) =>
-    translateDate(moment(date).format("dddd -  DD.MMMM")),
+    translateDate(moment(date).format("dddd -  DD. MMMM")),
   dayRangeHeaderFormat: ({ start, end }) =>
     translateDate(
       moment(start).format("DD") +
