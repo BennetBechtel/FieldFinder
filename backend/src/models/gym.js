@@ -27,7 +27,7 @@ const gymSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  filters: [
+  equipment: [
     {
       type: String,
       required: true,

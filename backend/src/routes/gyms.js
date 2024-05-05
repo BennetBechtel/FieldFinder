@@ -96,11 +96,11 @@ const constructSearchQuery = (queryParams) => {
     };
   }
 
-  if (queryParams.filters) {
-    constructedQuery.filters = {
-      $all: Array.isArray(queryParams.filters)
-        ? queryParams.filters
-        : [queryParams.filters],
+  if (queryParams.equipment) {
+    constructedQuery.equipment = {
+      $all: Array.isArray(queryParams.equipment)
+        ? queryParams.equipment
+        : [queryParams.equipment],
     };
   }
 

@@ -55,12 +55,12 @@ const Detail = () => {
         <section>
           <h2 className="mb-3 text-3xl font-bold">Ausstattung</h2>
           <span className="flex w-full flex-col gap-1">
-            {gym.filters.map((sport, index) => (
+            {gym.equipment.map((equip, index) => (
               <div
                 key={index}
                 className="w-full rounded-xl border border-slate-300 px-3 py-2 text-lg font-medium"
               >
-                {sport}
+                {equip}
               </div>
             ))}
           </span>

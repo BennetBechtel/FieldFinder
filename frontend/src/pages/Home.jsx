@@ -12,7 +12,7 @@ const Home = () => {
   const search = useSearchContext();
   const [page, setPage] = useState(1);
   const [selectedSports, setSelectedSports] = useState([]);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedEquipment, setSelectedEquipment] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState();
   const [sortOption, setSortOption] = useState("");
 
@@ -25,7 +25,7 @@ const Home = () => {
     searchTerm: search.searchTerm,
     page: page.toString(),
     sports: selectedSports,
-    filters: selectedFilters,
+    equipment: selectedEquipment,
     maxPrice: selectedPrice?.toString(),
     sortOption,
   };
@@ -44,13 +44,13 @@ const Home = () => {
     );
   };
 
-  const handleFiltersChange = (event) => {
-    const filter = event.target.value;
+  const handleEquipmentChange = (event) => {
+    const equip = event.target.value;
 
-    setSelectedFilters((prevFilter) =>
+    setSelectedEquipment((prevEquip) =>
       event.target.checked
-        ? [...prevFilter, filter]
-        : prevFilter.filter((prevFilter) => prevFilter !== filter),
+        ? [...prevEquip, equip]
+        : prevEquip.filter((prevEquip) => prevEquip !== equip),
     );
   };
 
@@ -76,8 +76,8 @@ const Home = () => {
           isFiltersOpen={isFiltersOpen}
           selectedSports={selectedSports}
           handleSportsChange={handleSportsChange}
-          selectedFilters={selectedFilters}
-          handleFiltersChange={handleFiltersChange}
+          selectedEquipment={selectedEquipment}
+          handleEquipmentChange={handleEquipmentChange}
           selectedPrice={selectedPrice}
           setSelectedPrice={setSelectedPrice}
         />

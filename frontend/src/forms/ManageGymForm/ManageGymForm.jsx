@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
-import FiltersSection from "./FiltersSection";
+import EquipmentSection from "./EquipmentSection";
 import ImagesSection from "./ImagesSection";
 import { useEffect } from "react";
 import SportsSection from "./SportsSection";
@@ -14,7 +14,6 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
   }, [gym, reset]);
 
   const onSubmit = handleSubmit((formDataJson) => {
-    console.log(formDataJson);
     const formData = new FormData();
     if (gym) {
       formData.append("gymId", gym._id);
@@ -29,8 +28,8 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
       formData.append(`sports[${index}]`, sport);
     });
 
-    formDataJson.filters.forEach((filter, index) => {
-      formData.append(`filters[${index}]`, filter);
+    formDataJson.equipment.forEach((equip, index) => {
+      formData.append(`equipment[${index}]`, equip);
     });
 
     if (formDataJson.imageUrls) {
@@ -55,7 +54,7 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
         <span className="flex flex-col gap-10">
           <DetailsSection />
           <SportsSection />
-          <FiltersSection />
+          <EquipmentSection />
           <ImagesSection />
         </span>
         <span className="flex justify-end">

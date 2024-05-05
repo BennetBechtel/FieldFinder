@@ -1,7 +1,7 @@
-import { gymFilters } from "../../config/gym-options-config.js";
+import { gymSports, gymEquipment } from "../../config/gym-options-config.js";
 import { useFormContext } from "react-hook-form";
 
-const FiltersSection = () => {
+const EquipmentSection = () => {
   const {
     register,
     formState: { errors },
@@ -9,42 +9,42 @@ const FiltersSection = () => {
 
   return (
     <div className="flex flex-col">
-      <h2 className="text-2xl font-bold">Filter</h2>
+      <h2 className="text-2xl font-bold">Ausstattung</h2>
       <div>
-        {gymFilters.map((item, index) => (
+        {gymEquipment.map((item, index) => (
           <div key={index} className="ml-2">
             <h3 className="mt-5 text-xl font-semibold">{item.title}</h3>
             <div className="flex flex-col gap-1">
-              {item.filters.map((filter, filterIndex) => (
+              {item.equipment.map((equip, equipIndex) => (
                 <label
-                  key={filterIndex}
+                  key={equipIndex}
                   className="ml-2 flex w-fit cursor-pointer select-none gap-1 pr-3 text-lg font-semibold text-gray-700"
                 >
                   <input
                     type="checkbox"
-                    value={filter}
-                    {...register("filters", {
-                      validate: (filters) => {
-                        if (filters && filters.length > 0) {
+                    value={equip}
+                    {...register("equipment", {
+                      validate: (equipment) => {
+                        if (equipment && equipment.length > 0) {
                           return true;
                         } else {
-                          return "Wähle mindestens einen Filter aus";
+                          return "Wähle mindestens ein Feld aus";
                         }
                       },
                     })}
                   />
-                  {filter}
+                  {equip}
                 </label>
               ))}
             </div>
           </div>
         ))}
       </div>
-      {errors.filters && (
-        <span className="input-error-message">{errors.filters.message}</span>
+      {errors.equipment && (
+        <span className="input-error-message">{errors.equipment.message}</span>
       )}
     </div>
   );
 };
 
-export default FiltersSection;
+export default EquipmentSection;

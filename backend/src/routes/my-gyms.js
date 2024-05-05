@@ -29,11 +29,11 @@ router.post(
     body("sports")
       .notEmpty()
       .isArray()
-      .withMessage("Select at least one filter"),
-    body("filters")
+      .withMessage("Select at least one equipment"),
+    body("equipment")
       .notEmpty()
       .isArray()
-      .withMessage("Select at least one filter"),
+      .withMessage("Select at least one equipment"),
   ],
   upload.array("imageFiles", 6),
   async (req, res) => {

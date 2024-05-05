@@ -9,13 +9,13 @@ export const gymSports = [
   },
 ];
 
-export const gymFilters = [
+export const gymEquipment = [
   {
     title: "Geräte",
-    filters: ["Weichbodenmatte", "Barren", "Sprungbrett"],
+    equipment: ["Weichbodenmatte", "Barren", "Sprungbrett"],
   },
   {
     title: "Extras",
-    filters: ["Spiegel", "Turnboden", "Trennwände", "Tribüne"],
+    equipment: ["Spiegel", "Turnboden", "Trennwände", "Tribüne"],
   },
 ];

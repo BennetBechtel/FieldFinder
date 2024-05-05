@@ -1,13 +1,13 @@
 import SportsFilter from "../components/SportsFilter.jsx";
-import FiltersFilter from "../components/FiltersFilter.jsx";
+import EquipmentFilter from "../components/EquipmentFilter.jsx";
 import PriceFilter from "../components/PriceFilter.jsx";
 
 const HomeFilters = ({
   isFiltersOpen,
   selectedSports,
   handleSportsChange,
-  selectedFilters,
-  handleFiltersChange,
+  selectedEquipment,
+  handleEquipmentChange,
   selectedPrice,
   setSelectedPrice,
 }) => {
@@ -26,9 +26,9 @@ const HomeFilters = ({
                     selectedSports={selectedSports}
                     onChange={handleSportsChange}
                   />
-                  <FiltersFilter
-                    selectedFilters={selectedFilters}
-                    onChange={handleFiltersChange}
+                  <EquipmentFilter
+                    selectedEquipment={selectedEquipment}
+                    onChange={handleEquipmentChange}
                   />
                   <PriceFilter
                     selectedPrice={selectedPrice}
@@ -52,9 +52,9 @@ const HomeFilters = ({
                 selectedSports={selectedSports}
                 onChange={handleSportsChange}
               />
-              <FiltersFilter
-                selectedFilters={selectedFilters}
-                onChange={handleFiltersChange}
+              <EquipmentFilter
+                selectedEquipment={selectedEquipment}
+                onChange={handleEquipmentChange}
               />
               <PriceFilter
                 selectedPrice={selectedPrice}

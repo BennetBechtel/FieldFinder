@@ -8,12 +8,14 @@ import MyGyms from "./pages/MyGyms";
 import EditGym from "./pages/EditGym";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
+import ScrollToTop from "./contexts/ScrollToTop";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

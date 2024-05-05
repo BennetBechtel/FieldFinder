@@ -123,8 +123,8 @@ export const searchGyms = async (searchParams) => {
   searchParams.sports?.forEach((sport) => {
     queryParams.append("sports", sport);
   });
-  searchParams.filters?.forEach((filter) => {
-    queryParams.append("filters", filter);
+  searchParams.equipment?.forEach((equip) => {
+    queryParams.append("equipment", equip);
   });
 
   const response = await fetch(
