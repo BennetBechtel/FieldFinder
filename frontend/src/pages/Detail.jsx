@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import * as apiClient from "./../api-client.js";
 import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm.jsx";
+import Calendar from "../components/Calendar/Calendar.jsx";
 
 const Detail = () => {
   const { gymId } = useParams();
@@ -26,9 +27,8 @@ const Detail = () => {
 
       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3`}>
         {gym.imageUrls.map((url, index) => (
-          <div className="max-h-[450px] min-h-fit">
+          <div key={index} className="max-h-[450px] min-h-fit">
             <img
-              key={index}
               src={url}
               alt={gym.name}
               className="h-full w-full rounded-md object-cover object-center"
@@ -65,11 +65,11 @@ const Detail = () => {
             ))}
           </span>
         </section>
-
-        {/*         <div className="h-fit">
-          <GuestInfoForm gymId={gym._id} pricePerHour={gym.pricePerHour} />
-        </div> */}
       </div>
+
+      <section className="mt-10 inline min-h-[700px]">
+        <Calendar events={gym?.bookings} />
+      </section>
     </div>
   );
 };

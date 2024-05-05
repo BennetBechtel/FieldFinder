@@ -1,0 +1,7 @@
+.rbc-current-time-indicator {
+  visibility: hidden;
+}
+
+.rbc-label rbc-time-header-gutter {
+  width: auto;
+}
