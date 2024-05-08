@@ -22,7 +22,13 @@ const AddGym = () => {
     mutate(gymFormData);
   };
 
-  return <ManageGymForm onSave={handleSave} isLoading={isLoading} />;
+  return (
+    <ManageGymForm
+      onSave={handleSave}
+      isLoading={isLoading}
+      formType={"AddGym"}
+    />
+  );
 };
 
 export default AddGym;

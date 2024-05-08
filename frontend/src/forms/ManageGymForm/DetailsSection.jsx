@@ -9,10 +9,6 @@ const DetailsSection = () => {
 
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-center sm:text-start">
-        <h1 className="mb-6 text-3xl font-bold">Sporthalle Hinzufügen</h1>
-      </span>
-
       <label className="gym-form">
         Name der Sporthalle:
         <input

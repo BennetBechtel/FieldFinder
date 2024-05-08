@@ -112,6 +112,20 @@ export const updateMyGymById = async (gymFormData) => {
   return response.json();
 };
 
+export const deleteMyGym = async (gymId) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-gyms/${gymId}`, {
+    method: "DELETE",
+
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to deleting Gym");
+  }
+
+  return response.json();
+};
+
 export const searchGyms = async (searchParams) => {
   const queryParams = new URLSearchParams();
   queryParams.append("searchTerm", searchParams.searchTerm || "");

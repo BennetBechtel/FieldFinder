@@ -120,6 +120,16 @@ router.put(
   }
 );
 
+router.delete("/:id", verifyToken, async (req, res) => {
+  const id = req.params.id.toString();
+  try {
+    const gym = await Gym.findByIdAndDelete(id);
+    res.json({ message: "Gym deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
 async function uploadImages(imageFiles) {
   const uploadPromises = imageFiles.map(async (image) => {
     const b64 = Buffer.from(image.buffer).toString("base64");

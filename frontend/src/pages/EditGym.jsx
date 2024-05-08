@@ -19,21 +19,49 @@ const EditGym = () => {
     },
   );
 
-  const { mutate, isLoading } = useMutation(apiClient.updateMyGymById, {
-    onSuccess: () => {
-      showToast({ message: "Sporthalle gespeichert!", type: "SUCCESS" });
-      navigate("/my-gyms");
+  const { mutate: mutateSave, isLoading } = useMutation(
+    apiClient.updateMyGymById,
+    {
+      onSuccess: () => {
+        showToast({ message: "Sporthalle gespeichert!", type: "SUCCESS" });
+        navigate("/my-gyms");
+      },
+      onError: () => {
+        showToast({ message: "Ein Fehler ist aufgetreten", type: "ERROR" });
+      },
     },
-    onError: () => {
-      showToast({ message: "Ein Fehler ist aufgetreten", type: "ERROR" });
-    },
-  });
+  );
 
   const handleSave = (gymFormData) => {
-    mutate(gymFormData);
+    mutateSave(gymFormData);
   };
 
-  return <ManageGymForm gym={gym} onSave={handleSave} isLoading={isLoading} />;
+  const { mutate: mutateDelete, isLoading: isLoadingDelete } = useMutation(
+    apiClient.deleteMyGym,
+    {
+      onSuccess: () => {
+        showToast({ message: "Sporthalle gelöscht!", type: "SUCCESS" });
+        navigate("/my-gyms");
+      },
+      onError: () => {
+        showToast({ message: "Ein Fehler ist aufgetreten", type: "ERROR" });
+      },
+    },
+  );
+
+  const handleDelete = (gymId) => {
+    mutateDelete(gymId);
+  };
+
+  return (
+    <ManageGymForm
+      gym={gym}
+      onSave={handleSave}
+      isLoading={isLoading || isLoadingDelete}
+      formType={"EditGym"}
+      onDelete={handleDelete}
+    />
+  );
 };
 
 export default EditGym;

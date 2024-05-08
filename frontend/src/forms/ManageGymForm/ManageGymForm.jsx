@@ -5,7 +5,7 @@ import ImagesSection from "./ImagesSection";
 import { useEffect } from "react";
 import SportsSection from "./SportsSection";
 
-const ManageGymForm = ({ onSave, isLoading, gym }) => {
+const ManageGymForm = ({ onSave, isLoading, gym, formType, onDelete }) => {
   const formMethods = useForm();
   const { handleSubmit, reset } = formMethods;
 
@@ -51,13 +51,35 @@ const ManageGymForm = ({ onSave, isLoading, gym }) => {
         onSubmit={onSubmit}
         className="mx-auto mt-3 flex w-full max-w-3xl grow flex-col gap-5 p-3"
       >
+        <span className="text-center sm:text-start">
+          <h1 className="text-3xl font-bold">
+            {formType === "AddGym" && "Sporthalle Hinzufügen"}
+            {formType === "EditGym" && "Sporthalle Bearbeiten"}
+          </h1>
+        </span>
+
         <span className="flex flex-col gap-10">
           <DetailsSection />
           <SportsSection />
           <EquipmentSection />
           <ImagesSection />
         </span>
-        <span className="flex justify-end">
+        <span
+          className={
+            formType === "EditGym" ? "flex justify-between" : "flex justify-end"
+          }
+        >
+          {formType === "EditGym" && (
+            <button
+              disabled={isLoading}
+              type="button"
+              onClick={() => onDelete(gym._id)}
+              className="rounded-2xl bg-red-600 px-4 py-3 text-xl font-bold transition duration-75 hover:opacity-85 active:opacity-75 disabled:bg-gray-400"
+            >
+              {isLoading ? "Löscht..." : "Löschen"}
+            </button>
+          )}
+
           <button disabled={isLoading} type="submit" className="gym-form">
             {isLoading ? "Speichert..." : "Speichern"}
           </button>
