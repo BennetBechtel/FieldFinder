@@ -1,3 +1,5 @@
+@import url("react-datepicker/dist/react-datepicker.css"); /* GuestInfoForm DatePicker */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

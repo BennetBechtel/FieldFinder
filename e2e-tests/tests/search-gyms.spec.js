@@ -29,3 +29,15 @@ test("should show gym search results", async ({ page }) => {
   await expect(page.getByText("Test City")).toBeVisible();
   await expect(page.getByText("11€ pro Stunde")).toBeVisible();
 });
+
+test("should show gym detail", async ({ page }) => {
+  await page.goto(UI_URL);
+
+  await page.getByPlaceholder("Suchen...").fill("Test Sporthalle");
+  await page.getByRole("button", { name: "Suchen" }).click();
+
+  await page.getByText("Test Sporthalle").click();
+  await page.getByRole("link", { name: "Ansehen" }).click();
+  await expect(page).toHaveURL(/detail/);
+  await expect(page.getByRole("button", { name: "Buchen" })).toBeVisible();
+});

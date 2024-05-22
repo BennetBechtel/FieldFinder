@@ -9,7 +9,7 @@ const SportsFilter = ({ selectedSports, onChange }) => {
           {gymSports.map((item, index) => (
             <div key={index} className="ml-2">
               <h3 className="mt-1 text-lg font-medium">{item.title}</h3>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col justify-center gap-1 text-center">
                 {item.sports.map((sport, sportIndex) => (
                   <label
                     key={sportIndex}

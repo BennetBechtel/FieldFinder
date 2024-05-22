@@ -47,6 +47,20 @@ const gymSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  bookings: [
+    {
+      day: {
+        type: String,
+        required: false,
+      },
+      times: [
+        {
+          type: String,
+          required: false,
+        },
+      ],
+    },
+  ],
 });
 
 const Gym = mongoose.model("Gym", gymSchema);

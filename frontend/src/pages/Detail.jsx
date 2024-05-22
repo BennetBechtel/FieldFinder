@@ -37,34 +37,41 @@ const Detail = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-        <section>
-          <h2 className="mb-3 text-3xl font-bold">Sportarten</h2>
-          <span className="flex w-full flex-col gap-1">
-            {gym.sports.map((sport, index) => (
-              <div
-                key={index}
-                className="w-full rounded-xl border border-slate-300 px-3 py-2 text-lg font-medium"
-              >
-                {sport}
-              </div>
-            ))}
-          </span>
-        </section>
+      <div className="grid grid-cols-1 gap-10 xl:grid-cols-[2fr_1fr]">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <section>
+            <h2 className="mb-3 text-3xl font-bold">Sportarten</h2>
+            <span className="flex w-full flex-col gap-1">
+              {gym.sports.map((sport, index) => (
+                <div
+                  key={index}
+                  className="w-full rounded-xl border border-slate-300 px-3 py-2 text-lg font-medium"
+                >
+                  {sport}
+                </div>
+              ))}
+            </span>
+          </section>
 
-        <section>
-          <h2 className="mb-3 text-3xl font-bold">Ausstattung</h2>
-          <span className="flex w-full flex-col gap-1">
-            {gym.equipment.map((equip, index) => (
-              <div
-                key={index}
-                className="w-full rounded-xl border border-slate-300 px-3 py-2 text-lg font-medium"
-              >
-                {equip}
-              </div>
-            ))}
-          </span>
-        </section>
+          <section>
+            <h2 className="mb-3 text-3xl font-bold">Ausstattung</h2>
+            <span className="flex w-full flex-col gap-1">
+              {gym.equipment.map((equip, index) => (
+                <div
+                  key={index}
+                  className="w-full rounded-xl border border-slate-300 px-3 py-2 text-lg font-medium"
+                >
+                  {equip}
+                </div>
+              ))}
+            </span>
+          </section>
+        </div>
+
+        <span>
+          <h2 className="mb-3 text-3xl font-bold">Buchen</h2>
+          <GuestInfoForm pricePerHour={gym.pricePerHour} />
+        </span>
       </div>
 
       <section className="mt-10 hidden h-[80vh] lg:inline">

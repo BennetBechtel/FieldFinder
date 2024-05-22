@@ -76,12 +76,12 @@ const ManageGymForm = ({ onSave, isLoading, gym, formType, onDelete }) => {
               onClick={() => onDelete(gym._id)}
               className="rounded-2xl bg-red-600 px-4 py-3 text-xl font-bold transition duration-75 hover:opacity-85 active:opacity-75 disabled:bg-gray-400"
             >
-              {isLoading ? "Löscht..." : "Löschen"}
+              Löschen
             </button>
           )}
 
           <button disabled={isLoading} type="submit" className="gym-form">
-            {isLoading ? "Speichert..." : "Speichern"}
+            Speichern
           </button>
         </span>
       </form>

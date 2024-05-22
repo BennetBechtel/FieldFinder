@@ -45,7 +45,7 @@ const SearchResultCard = ({ gym }) => {
           </span>
 
           <Link
-            to={`/details/${gym._id}`}
+            to={`/detail/${gym._id}`}
             className="absolute bottom-2 right-2 rounded-md bg-primary px-4 py-2 font-semibold transition duration-75 hover:opacity-85 active:opacity-75"
           >
             Ansehen
