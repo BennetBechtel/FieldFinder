@@ -9,32 +9,44 @@ import EditGym from "./pages/EditGym";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import ScrollToTop from "./contexts/ScrollToTop";
+import Booking from "./pages/Booking";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
 
+  const initialOptions = {
+    "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
+    currency: "EUR",
+    intent: "capture",
+    // "data-client-token": "abc123xyz==",
+  };
+
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/detail/:gymId" element={<Detail />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+    <PayPalScriptProvider options={initialOptions}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/detail/:gymId" element={<Detail />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
 
-          {isLoggedIn && (
-            <>
-              <Route path="/my-gyms" element={<MyGyms />} />
-              <Route path="/edit-gym/:gymId" element={<EditGym />} />
-              <Route path="/add-gym" element={<AddGym />} />
-            </>
-          )}
+            {isLoggedIn && (
+              <>
+                <Route path="/my-gyms" element={<MyGyms />} />
+                <Route path="/edit-gym/:gymId" element={<EditGym />} />
+                <Route path="/add-gym" element={<AddGym />} />
+                <Route path="/gym/:gymId/booking" element={<Booking />} />
+              </>
+            )}
 
-          <Route path="*" element={<Navigate to="/" />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route path="*" element={<Navigate to="/" />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </PayPalScriptProvider>
   );
 };
 

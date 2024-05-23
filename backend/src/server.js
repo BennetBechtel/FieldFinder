@@ -28,7 +28,7 @@ cloudinary.config({
 mongoose
   .connect(env.MONGO_CONNECTION_STRING)
   .then(console.log("Connected to MongoDB"))
-  .catch((error) => console.error(error));
+  .catch((error) => console.log(error));
 
 // Express App
 const app = express();

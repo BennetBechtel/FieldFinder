@@ -1,6 +1,10 @@
 import express from "express";
+import verifyToken from "../middleware/auth.js";
 import { param, validationResult } from "express-validator";
 import Gym from "../models/gym.js";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_API_KEY);
 
 const router = express.Router();
 
@@ -47,7 +51,7 @@ router.get("/search", async (req, res) => {
 
     res.json(response);
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json("Something went wrong");
   }
 });
@@ -71,6 +75,86 @@ router.get(
     }
   }
 );
+
+router.post("/:id/bookings/payment-intent", verifyToken, async (req, res) => {
+  const { numberOfHours } = req.body;
+  const gymId = req.params.id;
+
+  const gym = await Gym.findById(gymId);
+  if (!gym) {
+    return res.status(400).json({ message: "Gym not found" });
+  }
+
+  const totalCost = gym.pricePerHour * numberOfHours;
+
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: totalCost,
+    currency: "EUR",
+    metadata: {
+      gymId,
+      userId: req.userId,
+    },
+  });
+
+  if (!paymentIntent.client_secret) {
+    return res.status(500).json({ message: "Error creating payment intent" });
+  }
+
+  const response = {
+    paymentIntentId: paymentIntent.id,
+    client_secret: paymentIntent.client_secret.toString(),
+    totalCost,
+  };
+
+  res.send(response);
+});
+
+router.post("/:id/bookings", verifyToken, async (req, res) => {
+  try {
+    const paymentIntentId = req.body.paymentIntentId;
+
+    const paymentIntent = stripe.paymentIntents.retrieve(paymentIntentId);
+
+    if (!paymentIntent) {
+      return res.status(400).json({ message: "Payment intent not found" });
+    }
+
+    if (
+      paymentIntent.metadata.gymId !== req.params.id ||
+      paymentIntent.metadata.userId !== req.userId
+    ) {
+      return res.status(400).json({ message: "Payment intent mismatch" });
+    }
+
+    if (paymentIntent.status !== "succeeded") {
+      return res.status(400).json({
+        message: `Payment intent not succeeded. Status: ${paymentIntent.status}`,
+      });
+    }
+
+    const newBooking = {
+      ...req.body,
+      userId: req.userId,
+    };
+
+    const gym = await Gym.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $push: { bookings: newBooking },
+      }
+    );
+
+    if (!gym) {
+      return res.status(400).json({ message: "Gym not found" });
+    }
+
+    await gym.save();
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
 
 const constructSearchQuery = (queryParams) => {
   let constructedQuery = {};

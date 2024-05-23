@@ -1,5 +1,15 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
+export const fetchCurrentUser = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error fetching user");
+  }
+  return response.json();
+};
+
 export const register = async (formData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
     method: "POST",
@@ -157,6 +167,26 @@ export const fetchGymById = async (gymId) => {
 
   if (!response.ok) {
     throw new Error("Error fetching Gym");
+  }
+
+  return response.json();
+};
+
+export const createPaymentIntent = async (gymId, numberOfHours) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/gyms/${gymId}/payment-intent`,
+    {
+      credentials: "include",
+      method: "POST",
+      body: JSON.stringify({ numberOfHours }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Error fetching payment intent");
   }
 
   return response.json();

@@ -70,7 +70,7 @@ const Detail = () => {
 
         <span>
           <h2 className="mb-3 text-3xl font-bold">Buchen</h2>
-          <GuestInfoForm pricePerHour={gym.pricePerHour} />
+          <GuestInfoForm gymId={gym._id} pricePerHour={gym.pricePerHour} />
         </span>
       </div>
 

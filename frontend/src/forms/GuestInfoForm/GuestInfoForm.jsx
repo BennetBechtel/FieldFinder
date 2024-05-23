@@ -1,6 +1,6 @@
 import { useAppContext } from "../../contexts/AppContext";
 import { useForm } from "react-hook-form";
-import DatePicker from "react-datepicker"; // CSS Import
+import DatePicker from "react-datepicker"; /* CSS Import */
 import "./GuestInfoForm.css";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
