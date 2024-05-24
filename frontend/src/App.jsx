@@ -16,7 +16,8 @@ const App = () => {
   const { isLoggedIn } = useAppContext();
 
   const initialOptions = {
-    "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
+    "client-id":
+      "Aa9CsxFP_Drv5z9IN8VFT7rEK92KCw6sMxM9USpBdABVetpolbBgXpdOdqHzR6LQnac4JWQPyRaMV6vr",
     currency: "EUR",
     intent: "capture",
     // "data-client-token": "abc123xyz==",
