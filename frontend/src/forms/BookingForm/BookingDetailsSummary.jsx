@@ -32,17 +32,25 @@ const BookingDetailsSummary = ({
 
       <div className="flex justify-between pt-3">
         <div>
-          Start Uhrzeit
+          Start Uhrzeit:
           <div className="font-bold">{parseDate(startTime)}</div>
         </div>
         <div>
-          End Uhrzeit
+          End Uhrzeit:
           <div className="font-bold">{parseDate(endTime)}</div>
         </div>
       </div>
+
       <div className="pt-3">
-        Gesamtlänge der Buchung;
-        <div className="font-bold">{numberOfHours} Stunden</div>
+        Gesamtlänge der Buchung:
+        <div className="font-bold">
+          {numberOfHours} {numberOfHours > 1 ? "Stunden" : "Stunde"}
+        </div>
+      </div>
+
+      <div className="pt-3">
+        Preis pro Stunde:
+        <div className="font-bold">{gym.pricePerHour}€</div>
       </div>
     </div>
   );

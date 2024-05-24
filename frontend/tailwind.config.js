@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         primary: "#fea307",
+        checkout: "#ffd285",
       },
       screens: {
         "3xl": "1600px",

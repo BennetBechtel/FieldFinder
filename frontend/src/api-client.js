@@ -172,13 +172,33 @@ export const fetchGymById = async (gymId) => {
   return response.json();
 };
 
-export const createPaymentIntent = async (gymId, numberOfHours) => {
+export const createOrderPayPal = async (gymId, numberOfHours) => {
   const response = await fetch(
-    `${API_BASE_URL}/api/gyms/${gymId}/payment-intent`,
+    `${API_BASE_URL}/api/gyms/${gymId}/create-order`,
     {
       credentials: "include",
       method: "POST",
       body: JSON.stringify({ numberOfHours }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Error fetching payment intent");
+  }
+
+  return response.json().id;
+};
+
+export const onApprovePayPal = async (gymId, data) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/gyms/${gymId}/capture-order`,
+    {
+      credentials: "include",
+      method: "POST",
+      body: JSON.stringify({ orderID: data.orderID }),
       headers: {
         "Content-Type": "application/json",
       },

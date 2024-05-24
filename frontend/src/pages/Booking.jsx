@@ -38,7 +38,8 @@ const Booking = () => {
   );
 
   return (
-    <div className="mx-auto mt-10 flex h-1 max-w-6xl grow flex-col">
+    // <div className="mx-auto mt-10 flex h-1 max-w-6xl grow flex-col px-5">
+    <div className="mx-auto mt-5 flex min-h-1 max-w-6xl grow flex-col gap-5 px-3 md:mt-10 md:px-5">
       <div className="grid gap-3 md:grid-cols-[1fr_2fr]">
         <BookingDetailsSummary
           bookingDate={search.bookingDate}
@@ -47,7 +48,14 @@ const Booking = () => {
           numberOfHours={numberOfHours}
           gym={gym}
         />
-        {currentUser && <BookingForm currentUser={currentUser} />}
+        {currentUser && (
+          <BookingForm
+            currentUser={currentUser}
+            gymId={gymId}
+            numberOfHours={numberOfHours}
+            pricePerHour={gym.pricePerHour}
+          />
+        )}
       </div>
     </div>
   );

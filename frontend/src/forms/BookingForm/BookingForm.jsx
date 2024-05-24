@@ -1,7 +1,14 @@
 import { useForm } from "react-hook-form";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import PayPalPayment from "./PayPalPayment.jsx";
+import { useState } from "react";
 
-const BookingForm = ({ currentUser, paymentIntent }) => {
+function Message({ content }) {
+  return <p>{content}</p>;
+}
+
+const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
+  const [message, setMessage] = useState("");
+
   const { handleSubmit, register } = useForm({
     defaultValues: {
       firstName: currentUser.firstName,
@@ -47,7 +54,24 @@ const BookingForm = ({ currentUser, paymentIntent }) => {
           />
         </label>
       </div>
-      <PayPalButtons />
+
+      <div className="space-y-2">
+        <h2 className="text-xl font-semibold">Preisübersicht</h2>
+        <div className="bg-checkout rounded-md p-4">
+          <div className="text-lg font-semibold">
+            Gesamtkosten: {numberOfHours * pricePerHour}€
+          </div>
+          <div className="text-xs">Einschließlich Steuern und Gebühren</div>
+        </div>
+      </div>
+
+      <div className="mt-2">
+        <PayPalPayment
+          gymId={gymId}
+          numberOfHours={numberOfHours}
+          setMessage={setMessage}
+        />
+      </div>
     </form>
   );
 };
