@@ -53,7 +53,7 @@ const Booking = () => {
             currentUser={currentUser}
             gymId={gymId}
             numberOfHours={numberOfHours}
-            pricePerHour={gym.pricePerHour}
+            pricePerHour={gym?.pricePerHour}
           />
         )}
       </div>
