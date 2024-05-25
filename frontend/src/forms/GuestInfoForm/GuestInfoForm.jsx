@@ -6,12 +6,15 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { formatDate, parseDate } from "./formatDate";
 import { useSearchContext } from "../../contexts/SearchContext";
+import isDateAlreadyBooked from "./isDateAlreadyBooked";
 
-const GuestInfoForm = ({ gymId, pricePerHour }) => {
+const GuestInfoForm = ({ gymId, pricePerHour, events }) => {
   const search = useSearchContext();
   const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { showToast } = useAppContext();
 
   const {
     watch,
@@ -64,9 +67,16 @@ const GuestInfoForm = ({ gymId, pricePerHour }) => {
     const date = new Date(data.bookingDate).toISOString();
     const start = formatDate(date, data.startTime);
     const end = formatDate(date, data.endTime);
-    search.saveSearchValues("", data.bookingDate, start, end);
 
-    navigate(`/gym/${gymId}/booking`);
+    if (isDateAlreadyBooked(start, end, events)) {
+      showToast({
+        message: "Zeitraum überschneidet sich mit anderer Buchung",
+        type: "ERROR",
+      });
+    } else {
+      search.saveSearchValues("", data.bookingDate, start, end);
+      navigate(`/gym/${gymId}/booking`);
+    }
   };
 
   return (

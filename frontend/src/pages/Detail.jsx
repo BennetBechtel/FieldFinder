@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import * as apiClient from "./../api-client.js";
 import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm.jsx";
 import Calendar from "../components/Calendar/Calendar.jsx";
+import moment from "moment";
 
 const Detail = () => {
   const { gymId } = useParams();
@@ -18,6 +19,14 @@ const Detail = () => {
   if (!gym) {
     return <></>;
   }
+
+  let events = [];
+  gym.bookings.forEach((booking) => {
+    events.push({
+      start: moment(booking.startTime.substring(0, 19)).toDate(),
+      end: moment(booking.endTime.substring(0, 19)).toDate(),
+    });
+  });
 
   return (
     <div className="flex min-h-1 grow flex-col gap-5 px-3 md:px-5">
@@ -70,12 +79,16 @@ const Detail = () => {
 
         <span>
           <h2 className="mb-3 text-3xl font-bold">Buchen</h2>
-          <GuestInfoForm gymId={gym._id} pricePerHour={gym.pricePerHour} />
+          <GuestInfoForm
+            gymId={gym._id}
+            pricePerHour={gym.pricePerHour}
+            events={events}
+          />
         </span>
       </div>
 
       <section className="mt-10 hidden h-[80vh] lg:inline">
-        <Calendar events={gym?.bookings} />
+        <Calendar events={events} />
       </section>
     </div>
   );
