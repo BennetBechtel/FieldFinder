@@ -1,21 +1,41 @@
 import { useForm } from "react-hook-form";
 import PayPalPayment from "./PayPalPayment.jsx";
 import { useState } from "react";
-
-function Message({ content }) {
-  return <p>{content}</p>;
-}
+import { useSearchContext } from "../../contexts/SearchContext.jsx";
+import * as apiClient from "../../api-client.js";
+import { useAppContext } from "../../contexts/AppContext.jsx";
 
 const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
-  const [message, setMessage] = useState("");
+  const search = useSearchContext();
+  const { showToast } = useAppContext();
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
       email: currentUser.email,
+      bookingDate: search.bookingDate,
+      startTime: search.startTime,
+      endTime: search.endTime,
+      gymId: gymId,
+      totalCost: numberOfHours * pricePerHour,
     },
   });
+
+  const bookGym = () => {
+    const formData = {
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+      email: currentUser.email,
+      bookingDate: search.bookingDate,
+      startTime: search.startTime,
+      endTime: search.endTime,
+      gymId: gymId,
+      transaction: {},
+    };
+    apiClient.createGymBooking(formData);
+    showToast({ message: "Buchung gespeichert!", type: "SUCCESS" });
+  };
 
   return (
     <form className="grid h-fit grid-cols-1 gap-5 rounded-lg border border-slate-300 p-5">
@@ -57,7 +77,7 @@ const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
 
       <div className="space-y-2">
         <h2 className="text-xl font-semibold">Preisübersicht</h2>
-        <div className="bg-checkout rounded-md p-4">
+        <div className="rounded-md bg-checkout p-4">
           <div className="text-lg font-semibold">
             Gesamtkosten: {numberOfHours * pricePerHour}€
           </div>
@@ -69,7 +89,7 @@ const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
         <PayPalPayment
           gymId={gymId}
           numberOfHours={numberOfHours}
-          setMessage={setMessage}
+          bookGym={bookGym}
         />
       </div>
     </form>

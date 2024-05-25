@@ -107,6 +107,38 @@ router.post("/:id/orders/:orderID/capture", verifyToken, async (req, res) => {
   }
 });
 
+router.post("/:id/bookings", verifyToken, async (req, res) => {
+  try {
+    const newBooking = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      bookingDate: req.body.bookingDate,
+      startTime: req.body.startTime,
+      endTime: req.body.endTime,
+      userId: req.userId,
+      totalCost: req.body.totalCost,
+    };
+
+    const gym = await Gym.findOneAndUpdate(
+      { _id: req.params.id.toString() },
+      {
+        $push: { bookings: newBooking },
+      }
+    );
+
+    if (!gym) {
+      return res.status(400).json({ message: "Gym not found" });
+    }
+
+    await gym.save();
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
 const constructSearchQuery = (queryParams) => {
   let constructedQuery = {};
 

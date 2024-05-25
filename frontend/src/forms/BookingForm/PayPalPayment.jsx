@@ -1,7 +1,9 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useAppContext } from "../../contexts/AppContext";
 
-const PayPalPayment = ({ gymId, numberOfHours, setMessage }) => {
+const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+  const { showToast } = useAppContext();
 
   const createOrder = async () => {
     try {
@@ -24,17 +26,24 @@ const PayPalPayment = ({ gymId, numberOfHours, setMessage }) => {
           ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
           : JSON.stringify(orderData);
 
+        showToast({
+          message: "Could not initiate PayPal Checkout...",
+          type: "ERROR",
+        });
         throw new Error(errorMessage);
       }
     } catch (error) {
       console.error(error);
-      setMessage(`Could not initiate PayPal Checkout...`);
+      showToast({
+        message: "Could not initiate PayPal Checkout...",
+        type: "ERROR",
+      });
     }
   };
 
   const onApprove = async (data, actions) => {
     try {
-      const response = fetch(
+      const response = await fetch(
         `${API_BASE_URL}/api/gyms/${gymId}/orders/${data.orderID}/capture`,
         {
           method: "POST",
@@ -59,23 +68,23 @@ const PayPalPayment = ({ gymId, numberOfHours, setMessage }) => {
         return actions.restart();
       } else if (errorDetail) {
         // (2) Other non-recoverable errors -> Show a failure message
+        showToast({
+          message: "Could not initiate PayPal Checkout...",
+          type: "ERROR",
+        });
         throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
       } else {
         // (3) Successful transaction -> Show confirmation or thank you message
         // Or go to another URL:  actions.redirect('thank_you.html');
         const transaction = orderData.purchase_units[0].payments.captures[0];
-        setMessage(
-          `Transaction ${transaction.status}: ${transaction.id}. See console for all available details`,
-        );
-        console.log(
-          "Capture result",
-          orderData,
-          JSON.stringify(orderData, null, 2),
-        );
+        bookGym({ ...FormData, totalCost: Number(transaction.amount.value) });
       }
     } catch (error) {
       console.error(error);
-      setMessage(`Sorry, your transaction could not be processed...${error}`);
+      showToast({
+        message: "Sorry, your transaction could not be processed...",
+        type: "ERROR",
+      });
     }
   };
 

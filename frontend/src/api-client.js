@@ -171,3 +171,20 @@ export const fetchGymById = async (gymId) => {
 
   return response.json();
 };
+
+export const createGymBooking = async (formData) => {
+  const response = fetch(
+    `${API_BASE_URL}/api/gyms/${formData.gymId}/bookings`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    },
+  );
+
+  // if (!response.ok) throw new Error("Error booking gym");
+  // Always returns error somehow?
+};

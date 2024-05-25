@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
-  firstLast: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, required: true },
   bookingDate: { type: Date, required: true },
-  startTime: { type: String, required: true },
-  endTime: { type: String, required: true },
+  startTime: { type: Date, required: true },
+  endTime: { type: Date, required: true },
   userId: { type: String, required: true },
   totalCost: { type: Number, required: true },
 });
