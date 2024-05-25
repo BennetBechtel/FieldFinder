@@ -54,6 +54,7 @@ const Booking = () => {
             gymId={gymId}
             numberOfHours={numberOfHours}
             pricePerHour={gym?.pricePerHour}
+            bookings={gym?.bookings}
           />
         )}
       </div>

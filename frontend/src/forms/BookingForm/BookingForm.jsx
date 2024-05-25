@@ -1,13 +1,22 @@
 import { useForm } from "react-hook-form";
 import PayPalPayment from "./PayPalPayment.jsx";
-import { useState } from "react";
 import { useSearchContext } from "../../contexts/SearchContext.jsx";
 import * as apiClient from "../../api-client.js";
 import { useAppContext } from "../../contexts/AppContext.jsx";
+import { useNavigate } from "react-router-dom";
+import isDateAlreadyBooked from "../GuestInfoForm/isDateAlreadyBooked.js";
+import moment from "moment";
 
-const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
+const BookingForm = ({
+  currentUser,
+  gymId,
+  numberOfHours,
+  pricePerHour,
+  bookings,
+}) => {
   const search = useSearchContext();
   const { showToast } = useAppContext();
+  const navigate = useNavigate();
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -22,6 +31,14 @@ const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
     },
   });
 
+  let events = [];
+  bookings.forEach((booking) => {
+    events.push({
+      start: moment(booking.startTime.substring(0, 19)).toDate(),
+      end: moment(booking.endTime.substring(0, 19)).toDate(),
+    });
+  });
+
   const bookGym = () => {
     const formData = {
       firstName: currentUser.firstName,
@@ -34,6 +51,7 @@ const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
       transaction: {},
     };
     apiClient.createGymBooking(formData);
+    navigate(`/detail/${gymId}`);
     showToast({ message: "Buchung gespeichert!", type: "SUCCESS" });
   };
 
@@ -86,11 +104,18 @@ const BookingForm = ({ currentUser, gymId, numberOfHours, pricePerHour }) => {
       </div>
 
       <div className="mt-2">
-        <PayPalPayment
-          gymId={gymId}
-          numberOfHours={numberOfHours}
-          bookGym={bookGym}
-        />
+        {isDateAlreadyBooked(search.startTime, search.endTime, events) ? (
+          <div className="rounded-lg bg-red-700 p-5 text-center text-xl font-semibold text-white">
+            <div>Ungültige Buchung</div>
+            <div>Zeitraum nicht verfügbar</div>
+          </div>
+        ) : (
+          <PayPalPayment
+            gymId={gymId}
+            numberOfHours={numberOfHours}
+            bookGym={bookGym}
+          />
+        )}
       </div>
     </form>
   );
