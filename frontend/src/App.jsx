@@ -11,6 +11,7 @@ import Detail from "./pages/Detail";
 import ScrollToTop from "./contexts/ScrollToTop";
 import Booking from "./pages/Booking";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import MyBookings from "./pages/MyBookings";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path="/edit-gym/:gymId" element={<EditGym />} />
                 <Route path="/add-gym" element={<AddGym />} />
                 <Route path="/gym/:gymId/booking" element={<Booking />} />
+                <Route path="/my-bookings" element={<MyBookings />} />
               </>
             )}
 

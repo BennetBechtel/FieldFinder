@@ -101,4 +101,38 @@ const captureOrder = async (orderID) => {
   return handleResponse(response);
 };
 
-export { generateAccessToken, handleResponse, createOrder, captureOrder };
+const isDateValid = (start, end, bookings) => {
+  const newStart = new Date(start.toString().substring(0, 19));
+  const newEnd = new Date(end.toString().substring(0, 19));
+
+  let events = [];
+  bookings.forEach((booking) => {
+    events.push({
+      start: new Date(booking.startTime.toString().substring(0, 19)),
+      end: new Date(booking.endTime.toString().substring(0, 19)),
+    });
+  });
+
+  let isValid = true;
+  events.forEach((event) => {
+    const existingStart = event.start;
+    const existingEnd = event.end;
+
+    if (newStart <= existingStart && newEnd >= existingEnd) {
+      isValid = false;
+    }
+    if (newStart <= existingStart && newEnd > existingStart) {
+      isValid = false;
+    }
+    if (newStart < existingEnd && newEnd >= existingEnd) {
+      isValid = false;
+    }
+    if (newStart >= existingStart && newEnd <= existingEnd) {
+      isValid = false;
+    }
+  });
+
+  return isValid;
+};
+
+export { createOrder, captureOrder, isDateValid };

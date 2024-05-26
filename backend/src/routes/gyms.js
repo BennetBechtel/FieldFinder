@@ -4,10 +4,9 @@ import verifyToken from "../middleware/auth.js";
 import { param, validationResult } from "express-validator";
 import Gym from "../models/gym.js";
 import {
-  generateAccessToken,
-  handleResponse,
   createOrder,
   captureOrder,
+  isDateValid,
 } from "../util/paypal-api-functions.js";
 
 const router = express.Router();
@@ -117,22 +116,36 @@ router.post("/:id/bookings", verifyToken, async (req, res) => {
       startTime: req.body.startTime,
       endTime: req.body.endTime,
       userId: req.userId,
-      totalCost: req.body.totalCost,
+      totalCost: Number(req.body.totalCost),
     };
 
-    const gym = await Gym.findOneAndUpdate(
+    if (
+      new Date(newBooking.startTime.toString().substring(0, 19)) >
+      new Date(newBooking.endTime.toString().substring(0, 19))
+    ) {
+      return res.status(400).json({ message: "Invalid date" });
+    }
+
+    const gym = await Gym.findById(req.params.id);
+    if (!gym) {
+      return res.status(400).json({ message: "Gym not found" });
+    }
+    if (!isDateValid(newBooking.startTime, newBooking.endTime, gym.bookings)) {
+      return res.status(400).json({ message: "Invalid date" });
+    }
+
+    const updateGym = await Gym.findOneAndUpdate(
       { _id: req.params.id.toString() },
       {
         $push: { bookings: newBooking },
       }
     );
 
-    if (!gym) {
+    if (!updateGym) {
       return res.status(400).json({ message: "Gym not found" });
     }
 
-    await gym.save();
-    res.status(200).send();
+    res.status(200).json({ message: "Booking saved successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });

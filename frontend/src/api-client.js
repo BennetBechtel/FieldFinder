@@ -188,3 +188,15 @@ export const createGymBooking = async (formData) => {
   // if (!response.ok) throw new Error("Error booking gym");
   // Always returns error somehow?
 };
+
+export const fetchMyBookings = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/my-bookings`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Unable to fetch bookings");
+  }
+
+  return response.json();
+};
