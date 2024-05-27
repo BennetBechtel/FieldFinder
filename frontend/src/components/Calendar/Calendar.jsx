@@ -49,10 +49,14 @@ const formats = {
   timeGutterFormat: "HH:mm",
 };
 
+const components = {
+  event: {},
+};
+
 const Calendar = ({ events }) => {
   return (
     <BigCalendar
-      style={{ height: "100%" }}
+      style={{ height: "85vh" }}
       localizer={localizer}
       culture="de"
       messages={messages}

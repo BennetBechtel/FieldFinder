@@ -87,7 +87,7 @@ const Detail = () => {
         </span>
       </div>
 
-      <section className="mt-10 hidden h-[80vh] lg:inline">
+      <section className="mt-10 flex h-fit w-full justify-center">
         <Calendar events={events} />
       </section>
     </div>

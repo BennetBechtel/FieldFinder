@@ -6,6 +6,28 @@
   width: auto;
 }
 
+.rbc-allday-cell {
+  display: none;
+}
+
+.rbc-events-container {
+  margin-right: 0 !important;
+}
+
+.rbc-event,
+.rbc-background-event {
+  background-color: #888888 !important;
+  border: none !important;
+  outline: none !important;
+}
+
 .rbc-calendar {
   overflow: hidden;
+  width: 100%;
+}
+
+@media (max-width: 862px) {
+  .rbc-calendar {
+    max-width: 90vw;
+  }
 }
