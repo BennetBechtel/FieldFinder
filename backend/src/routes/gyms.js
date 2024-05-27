@@ -119,17 +119,11 @@ router.post("/:id/bookings", verifyToken, async (req, res) => {
       totalCost: Number(req.body.totalCost),
     };
 
-    if (
-      new Date(newBooking.startTime.toString().substring(0, 19)) >
-      new Date(newBooking.endTime.toString().substring(0, 19))
-    ) {
-      return res.status(400).json({ message: "Invalid date" });
-    }
-
     const gym = await Gym.findById(req.params.id);
     if (!gym) {
       return res.status(400).json({ message: "Gym not found" });
     }
+
     if (!isDateValid(newBooking.startTime, newBooking.endTime, gym.bookings)) {
       return res.status(400).json({ message: "Invalid date" });
     }

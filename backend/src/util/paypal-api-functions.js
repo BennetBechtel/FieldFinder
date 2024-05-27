@@ -101,9 +101,27 @@ const captureOrder = async (orderID) => {
   return handleResponse(response);
 };
 
+const correctDate = (date) => {
+  const start = date.substring(0, date.indexOf("T") + 1);
+  let time = String(
+    Number(date.substring(date.indexOf("T") + 1, date.indexOf("T") + 3))
+  );
+  if (time < 10) {
+    time = "0" + time;
+  }
+  const end = date.substring(date.indexOf("T") + 3, date.length);
+
+  const output = start + time + end;
+  return output;
+};
+
 const isDateValid = (start, end, bookings) => {
-  const newStart = new Date(start.toString().substring(0, 19));
-  const newEnd = new Date(end.toString().substring(0, 19));
+  const newStart = new Date(correctDate(start.toString()));
+  const newEnd = new Date(correctDate(end.toString()));
+
+  if (newStart > newEnd) {
+    return false;
+  }
 
   let events = [];
   bookings.forEach((booking) => {
@@ -115,8 +133,8 @@ const isDateValid = (start, end, bookings) => {
 
   let isValid = true;
   events.forEach((event) => {
-    const existingStart = event.start;
-    const existingEnd = event.end;
+    const existingStart = new Date(event.start.toString());
+    const existingEnd = new Date(event.end.toString());
 
     if (newStart <= existingStart && newEnd >= existingEnd) {
       isValid = false;

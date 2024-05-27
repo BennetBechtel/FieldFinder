@@ -27,7 +27,7 @@ const BookingForm = ({
       startTime: search.startTime,
       endTime: search.endTime,
       gymId: gymId,
-      totalCost: numberOfHours * pricePerHour,
+      totalCost: Number(numberOfHours * pricePerHour),
     },
   });
 

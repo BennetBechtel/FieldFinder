@@ -70,7 +70,7 @@ const GuestInfoForm = ({ gymId, pricePerHour, events }) => {
 
     if (isDateAlreadyBooked(start, end, events)) {
       showToast({
-        message: "Zeitraum überschneidet sich mit anderer Buchung",
+        message: "Zeitraum nicht verfügbar",
         type: "ERROR",
       });
     } else {

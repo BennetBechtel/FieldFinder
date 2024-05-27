@@ -181,7 +181,10 @@ export const createGymBooking = async (formData) => {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        ...formData,
+        totalCost: Number(formData.totalCost),
+      }),
     },
   );
 
