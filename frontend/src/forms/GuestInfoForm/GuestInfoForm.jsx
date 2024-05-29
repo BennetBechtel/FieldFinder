@@ -38,6 +38,7 @@ const GuestInfoForm = ({ gymId, pricePerHour, events }) => {
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const availableTimes = [
+    "08:00",
     "09:00",
     "10:00",
     "11:00",

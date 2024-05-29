@@ -56,7 +56,7 @@ const components = {
 const Calendar = ({ events }) => {
   return (
     <BigCalendar
-      style={{ height: "85vh" }}
+      style={{ height: "fit-content" }}
       localizer={localizer}
       culture="de"
       messages={messages}

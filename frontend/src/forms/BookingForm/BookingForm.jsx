@@ -81,7 +81,7 @@ const BookingForm = ({
           />
         </label>
 
-        <label className="flex-1 text-sm font-bold text-gray-700">
+        <label className="col-span-2 flex-1 text-sm font-bold text-gray-700 lg:col-span-1">
           Email
           <input
             type="text"
