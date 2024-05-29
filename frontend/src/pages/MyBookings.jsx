@@ -58,7 +58,7 @@ const MyBookings = () => {
   return (
     <>
       <div className="mt-5 flex grow flex-col px-5 lg:px-10">
-        <span className="mb-5">
+        <span className="mb-5 text-center sm:text-left">
           <h1 className="text-3xl font-bold">Meine Buchungen</h1>
         </span>
 
