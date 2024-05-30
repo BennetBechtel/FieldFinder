@@ -4,11 +4,13 @@ const SearchResultCard = ({ gym }) => {
   return (
     <>
       <div className="relative max-w-full overflow-hidden rounded-lg bg-white shadow-md">
-        <img
-          src={gym.imageUrls[0]}
-          alt={gym.name}
-          className="h-64 w-full object-cover"
-        />
+        <Link to={`/detail/${gym._id}`}>
+          <img
+            src={gym.imageUrls[0]}
+            alt={gym.name}
+            className="h-64 w-full object-cover"
+          />
+        </Link>
         <div className="p-4">
           <h2 className="text-2xl font-semibold">{gym.name}</h2>
           <p className="mt-2 text-lg font-medium text-gray-600">

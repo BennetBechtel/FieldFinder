@@ -192,6 +192,29 @@ export const createGymBooking = async (formData) => {
   // Always returns error somehow?
 };
 
+export const validateBookingCheckout = async (gymId, startTime, endTime) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/gyms/${gymId}/validate-booking`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        startTime,
+        endTime,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Error validating booking");
+  }
+
+  return response.json();
+};
+
 export const fetchMyBookings = async () => {
   const response = await fetch(`${API_BASE_URL}/api/my-bookings`, {
     credentials: "include",

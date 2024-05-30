@@ -13,7 +13,7 @@ const SportsFilter = ({ selectedSports, onChange }) => {
                 {item.sports.map((sport, sportIndex) => (
                   <label
                     key={sportIndex}
-                    className="ml-2 flex w-fit cursor-pointer select-none gap-1 pr-3 text-lg font-medium text-gray-700"
+                    className="ml-2 flex w-fit cursor-pointer select-none items-center justify-center gap-1 pr-3 text-center text-lg font-medium text-gray-700"
                   >
                     <input
                       type="checkbox"

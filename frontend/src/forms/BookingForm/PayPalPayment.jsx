@@ -1,7 +1,7 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useAppContext } from "../../contexts/AppContext";
 
-const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
+const PayPalPayment = ({ gymId, numberOfHours, bookGym, validateCheckout }) => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
   const { showToast } = useAppContext();
 
@@ -27,7 +27,7 @@ const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
           : JSON.stringify(orderData);
 
         showToast({
-          message: "Could not initiate PayPal Checkout...",
+          message: "PayPal Checkout fehlgeschlagen...",
           type: "ERROR",
         });
         throw new Error(errorMessage);
@@ -35,7 +35,7 @@ const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
     } catch (error) {
       console.error(error);
       showToast({
-        message: "Could not initiate PayPal Checkout...",
+        message: "PayPal Checkout fehlgeschlagen...",
         type: "ERROR",
       });
     }
@@ -43,6 +43,11 @@ const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
 
   const onApprove = async (data, actions) => {
     try {
+      const available = await validateCheckout();
+      if (!available.message === "Valid date") {
+        throw new Error("Invalide date");
+      }
+
       const response = await fetch(
         `${API_BASE_URL}/api/gyms/${gymId}/orders/${data.orderID}/capture`,
         {
@@ -69,7 +74,7 @@ const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
       } else if (errorDetail) {
         // (2) Other non-recoverable errors -> Show a failure message
         showToast({
-          message: "Could not initiate PayPal Checkout...",
+          message: "PayPal Checkout fehlgeschlagen...",
           type: "ERROR",
         });
         throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
@@ -82,7 +87,7 @@ const PayPalPayment = ({ gymId, numberOfHours, bookGym }) => {
     } catch (error) {
       console.error(error);
       showToast({
-        message: "Sorry, your transaction could not be processed...",
+        message: "PayPal Checkout fehlgeschlagen...",
         type: "ERROR",
       });
     }

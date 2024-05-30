@@ -146,6 +146,19 @@ router.post("/:id/bookings", verifyToken, async (req, res) => {
   }
 });
 
+router.post("/:id/validate-booking", verifyToken, async (req, res) => {
+  const gym = await Gym.findById(req.params.id);
+  if (!gym) {
+    return res.status(400).json({ message: "Gym not found" });
+  }
+
+  if (!isDateValid(req.body.startTime, req.body.endTime, gym.bookings)) {
+    return res.status(400).json({ message: "Invalid date" });
+  }
+
+  return res.status(200).json({ message: "Valid date" });
+});
+
 const constructSearchQuery = (queryParams) => {
   let constructedQuery = {};
 

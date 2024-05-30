@@ -7,7 +7,14 @@ const MyBookings = () => {
   const { data: gyms } = useQuery("fetchMyBookings", apiClient.fetchMyBookings);
 
   if (!gyms || gyms.length === 0) {
-    return <span>Keine Buchungen gefunden</span>;
+    return (
+      <div className="mt-5 flex grow flex-col px-5 lg:px-10">
+        <span className="mb-5 text-center sm:text-left">
+          <h1 className="text-3xl font-bold">Meine Buchungen</h1>
+        </span>
+        <h2 className="text-lg font-semibold">Keine Buchungen gefunden...</h2>
+      </div>
+    );
   }
 
   const today = startOfDay(new Date());
@@ -46,6 +53,19 @@ const MyBookings = () => {
     isAfter(parseISO(booking.bookingDate), today),
   );
 
+  if (filteredBookings.length === 0) {
+    return (
+      <div className="mt-5 flex grow flex-col px-5 lg:px-10">
+        <span className="mb-5 text-center sm:text-left">
+          <h1 className="text-3xl font-bold">Meine Buchungen</h1>
+        </span>
+        <h2 className="text-lg font-semibold">
+          Du hast keine zukünftigen Buchungen...
+        </h2>
+      </div>
+    );
+  }
+
   const groupedBookings = filteredBookings.reduce((acc, booking) => {
     const date = formatDate(booking.bookingDate);
     if (!acc[date]) {
@@ -56,46 +76,42 @@ const MyBookings = () => {
   }, {});
 
   return (
-    <>
-      <div className="mt-5 flex grow flex-col px-5 lg:px-10">
-        <span className="mb-5 text-center sm:text-left">
-          <h1 className="text-3xl font-bold">Meine Buchungen</h1>
-        </span>
+    <div className="mt-5 flex grow flex-col px-5 lg:px-10">
+      <span className="mb-5 text-center sm:text-left">
+        <h1 className="text-3xl font-bold">Meine Buchungen</h1>
+      </span>
 
-        <div className="w-full space-y-8">
-          {Object.keys(groupedBookings).map((date) => (
-            <div key={date}>
-              <div className="mb-4 text-3xl font-bold text-gray-800">
-                {date}
-              </div>
-              {groupedBookings[date].map((booking, index) => {
-                const gym = gyms.find(
-                  (gym) => gym._id.toString() === booking.gymId.toString(),
-                );
+      <div className="w-full space-y-8">
+        {Object.keys(groupedBookings).map((date) => (
+          <div key={date}>
+            <div className="mb-4 text-3xl font-bold text-gray-800">{date}</div>
+            {groupedBookings[date].map((booking, index) => {
+              const gym = gyms.find(
+                (gym) => gym._id.toString() === booking.gymId.toString(),
+              );
 
-                return (
-                  <div
-                    key={index}
-                    className="mx-1 mb-4 transform rounded-lg border-[1px] border-l-4 border-gray-300 border-l-orange-500 bg-slate-50 px-5 py-4 shadow-md"
-                  >
-                    <div className="mb-2 text-xl font-bold text-gray-700">
-                      {formatTime(booking.startTime)} -{" "}
-                      {formatTime(booking.endTime)}
-                    </div>
-                    <Link
-                      className="text-lg font-medium text-gray-700"
-                      to={`/detail/${gym._id}`}
-                    >
-                      {gym.name}
-                    </Link>
+              return (
+                <div
+                  key={index}
+                  className="mx-1 mb-4 transform rounded-lg border-[1px] border-l-4 border-gray-300 border-l-orange-500 bg-slate-50 px-5 py-4 shadow-md"
+                >
+                  <div className="mb-2 text-xl font-bold text-gray-700">
+                    {formatTime(booking.startTime)} -{" "}
+                    {formatTime(booking.endTime)}
                   </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
+                  <Link
+                    className="text-lg font-medium text-gray-700"
+                    to={`/detail/${gym._id}`}
+                  >
+                    {gym.name}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

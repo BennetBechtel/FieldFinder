@@ -55,6 +55,15 @@ const BookingForm = ({
     showToast({ message: "Buchung gespeichert!", type: "SUCCESS" });
   };
 
+  const validateCheckout = async () => {
+    const response = await apiClient.validateBookingCheckout(
+      gymId,
+      search.startTime,
+      search.endTime,
+    );
+    return response;
+  };
+
   return (
     <form className="grid h-fit grid-cols-1 gap-5 rounded-lg border border-slate-300 p-5">
       <span className="text-3xl font-bold">Bestätigen Sie Ihre Angaben</span>
@@ -114,6 +123,7 @@ const BookingForm = ({
             gymId={gymId}
             numberOfHours={numberOfHours}
             bookGym={bookGym}
+            validateCheckout={validateCheckout}
           />
         )}
       </div>

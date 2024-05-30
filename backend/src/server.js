@@ -40,7 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: env.FRONTEND_URL,
+    origin: [env.FRONTEND_URL, "http://192.168.178.87"],
     credentials: true,
   })
 );
