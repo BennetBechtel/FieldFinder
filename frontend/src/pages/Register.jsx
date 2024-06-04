@@ -72,7 +72,7 @@ const Register = () => {
               required: "Geben Sie Ihre Email-Adresse an",
             })}
             type="email"
-            placeholder="email@addresse.de"
+            placeholder="email@adresse.de"
             className="login"
           />
           {errors.email && (

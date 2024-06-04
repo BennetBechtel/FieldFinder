@@ -92,6 +92,7 @@ const GuestInfoForm = ({ gymId, pricePerHour, events }) => {
           <div>
             <DatePicker
               dateFormat="dd.MM.yyyy"
+              calendarStartDay={1}
               required
               selected={bookingDate}
               onChange={(date) => setValue("bookingDate", date)}
