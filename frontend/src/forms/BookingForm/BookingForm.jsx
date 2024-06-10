@@ -51,7 +51,7 @@ const BookingForm = ({
       transaction: {},
     };
     apiClient.createGymBooking(formData);
-    navigate(`/detail/${gymId}`);
+    navigate(`/my-bookings`);
     showToast({ message: "Buchung gespeichert!", type: "SUCCESS" });
   };
 
