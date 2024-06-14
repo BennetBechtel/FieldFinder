@@ -163,9 +163,9 @@ const constructSearchQuery = (queryParams) => {
   let constructedQuery = {};
 
   if (queryParams.searchTerm) {
+    const querySearchTerm = queryParams.searchTerm.trim();
     const modSearchTerm =
-      queryParams.searchTerm[0].toUpperCase() +
-      queryParams.searchTerm.slice(1).toLowerCase();
+      querySearchTerm[0].toUpperCase() + querySearchTerm.slice(1).toLowerCase();
 
     constructedQuery.$or = [
       { city: new RegExp(modSearchTerm, "i") },
