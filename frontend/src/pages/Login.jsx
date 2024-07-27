@@ -75,7 +75,7 @@ const Login = () => {
             Anmelden
           </button>
           <div className="items-center py-2 text-center text-gray-500">
-            Du hast noch kleinen Account?
+            Du hast noch keinen Account?
             <Link to={"/register"} className="ml-1 text-gray-700 underline">
               Registrieren
             </Link>
