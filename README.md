@@ -8,6 +8,8 @@ Eine Buchung kann mit einem PayPal-Sandbox-Account durchgeführt werden:
 PayPal-Email: test@field-finder.de <br />
 PayPal-Passwort: FieldFinder
 
+<ins>FieldFinder ist nur ein Konzept und wird nicht zur Durchführung von realen Transaktionen und Buchungen verwendet!</ins>
+
 -----
 
 The FieldFinder project was created as part of a school project with the aim of founding a social business.
@@ -19,3 +21,5 @@ A booking can be made with a PayPal sandbox account:
 
 PayPal email: test@field-finder.de <br />
 PayPal password: FieldFinder
+
+<ins>FieldFinder is only a concept and is not used to carry out real transactions and bookings!</ins>
